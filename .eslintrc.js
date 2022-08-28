@@ -19,7 +19,13 @@ module.exports = {
     },
   },
   plugins: ["react", "@typescript-eslint", "jest"],
-  ignorePatterns: ["**/*.css", "**/*.svg"],
+  ignorePatterns: [
+    "**/*.css",
+    "**/*.svg",
+    "node_modules",
+    "build/*",
+    "craco.config.js",
+  ],
   rules: {
     "react/jsx-filename-extension": [
       2,
