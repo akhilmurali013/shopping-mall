@@ -10,7 +10,7 @@ module.exports = {
         lessLoaderOptions: {
           lessOptions: {
             modifyVars: {
-              "@primary-color": theme.color["primary-700"],
+              "@primary-color": theme.color["primary-600"],
               "@success-color": theme.color["success-700"],
               "@warning-color": theme.color["warning-700"],
               "@error-color": theme.color["error-700"],

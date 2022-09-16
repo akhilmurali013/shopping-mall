@@ -1,24 +1,22 @@
 import React from "react";
 
 import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import { Button, Typography } from "antd";
+import LoginView from "login";
+
 import "./App.less";
 
 const queryClient = new QueryClient();
 
 const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
-    <div>12345677</div>
-    <Button style={{ backgroundColor: "red" }}>primary</Button>
-    <Button type="ghost">ghost</Button>
-    <Button type="dashed">dashed</Button>
-    <Button type="default">default</Button>
-    <Button type="link">link</Button>
-    <Button type="text">text</Button>
-    <Typography>12344</Typography>
-    {/* <Button type="primary">Button</Button>
-    <Button type="primary">Button</Button> */}
+    <BrowserRouter>
+      <Routes>
+        <Route path="login/*" element={<LoginView />} />
+        <Route path="*" element={<Navigate to="login" replace />} />
+      </Routes>
+    </BrowserRouter>
   </QueryClientProvider>
 );
 
