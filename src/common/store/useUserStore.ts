@@ -4,17 +4,21 @@ type userDetails = {
   isAuthenticated: boolean;
   firstName: string;
   lastName: string;
+  email: string;
 };
 
 interface store {
   userDetails?: userDetails;
+  clearUserDetails: () => void;
+  setUserDetails: (details: userDetails) => void;
 }
 
-const userStore = create<store>((set) => ({
+const useUserStore = create<store>((set) => ({
   userDetails: {
     isAuthenticated: false,
-    firstName: "",
-    lastName: "",
+    firstName: "Thanveer",
+    lastName: "Gopalan",
+    email: "Thanveer@hilite.com",
   },
   setUserDetails: (userDetails: userDetails) =>
     set((state) => ({ ...state, ...userDetails })),
@@ -22,4 +26,4 @@ const userStore = create<store>((set) => ({
     set((state) => ({ ...state, userDetails: undefined })),
 }));
 
-export default userStore;
+export default useUserStore;

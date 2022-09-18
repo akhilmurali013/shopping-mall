@@ -2,8 +2,9 @@ import React from "react";
 
 import { Typography } from "antd";
 
+import Logo from "common/components/hi-lite-logo";
+
 import LoginForm from "./components/login-form";
-import Logo from "./components/logo";
 
 import "./styles.less";
 
