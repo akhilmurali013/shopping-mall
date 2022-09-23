@@ -1,8 +1,8 @@
 import React, { useMemo, useRef, useState } from "react";
 
 import { NavLink, matchPath, useLocation, useNavigate } from "react-router-dom";
-import { useClickAway } from "react-use";
 
+import { useClickAway } from "ahooks";
 import { Button, Typography } from "antd";
 
 import { ModuleConfig } from "app/models/module-config";
@@ -43,7 +43,7 @@ const NavItemNestedTabs: React.FC<{ module: ModuleConfig }> = ({ module }) => {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
-  useClickAway(ref, () => setOpen(false));
+  useClickAway(() => setOpen(false), ref);
 
   const isActive = useMemo(() => {
     const match = matchPath("/a/:tab/*", pathname);

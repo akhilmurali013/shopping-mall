@@ -1,12 +1,10 @@
 import React from "react";
 
-import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Input } from "antd";
-import * as yup from "yup";
+import { Button, Form, Input } from "antd";
 
-import Container from "common/components/container";
+import useUserStore from "common/store/useUserStore";
 
 import "./styles.less";
 
@@ -16,32 +14,55 @@ type LoginFormValues = {
 };
 
 const LoginForm: React.FC = () => {
-  const { register } = useForm<LoginFormValues>({
-    mode: "onChange",
-    resolver: yupResolver(
-      yup.object().shape({
-        email: yup.string().required().email(),
-        password: yup.string().required(),
-      })
-    ),
-  });
+  const navigate = useNavigate();
+  const setUserDetails = useUserStore((state) => state.setUserDetails);
+  const [form] = Form.useForm<LoginFormValues>();
+
+  const onFinish = (values: LoginFormValues) => {
+    setUserDetails({
+      isAuthenticated: true,
+      firstName: "Thanveer",
+      lastName: "Gopal",
+      email: values.email,
+    });
+    navigate("/a");
+  };
 
   return (
-    <form>
-      <Container label="Email">
-        <Input
-          size="large"
-          placeholder="Enter your email"
-          {...register("email")}
-        />
-      </Container>
-      <Container label="Password" className="password-container">
-        <Input size="large" type="password" {...register("password")} />
-      </Container>
-      <Button block type="primary" htmlType="submit" size="large">
-        Sign in
-      </Button>
-    </form>
+    <Form
+      form={form}
+      layout="vertical"
+      requiredMark={false}
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      autoComplete="off"
+      className="form"
+    >
+      <Form.Item
+        label="Email"
+        name="email"
+        rules={[
+          { required: true, message: "Please enter your email" },
+          { type: "email", message: "Invalid email" },
+        ]}
+      >
+        <Input size="large" placeholder="Enter your email" />
+      </Form.Item>
+
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: "Please input your password!" }]}
+      >
+        <Input size="large" type="password" />
+      </Form.Item>
+
+      <Form.Item>
+        <Button block type="primary" htmlType="submit" size="large">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   );
 };
 
