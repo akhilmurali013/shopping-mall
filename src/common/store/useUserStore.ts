@@ -21,7 +21,7 @@ const useUserStore = create<store>((set) => ({
     email: "Thanveer@hilite.com",
   },
   setUserDetails: (userDetails: userDetails) =>
-    set((state) => ({ ...state, ...userDetails })),
+    set((state) => ({ ...state, userDetails })),
   clearUserDetails: () =>
     set((state) => ({ ...state, userDetails: undefined })),
 }));

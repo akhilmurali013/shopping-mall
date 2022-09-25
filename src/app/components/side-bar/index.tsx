@@ -120,7 +120,7 @@ const SideBarFooter: React.FC = () => {
         </Title>
         <Text type="secondary">{userDetails?.email}</Text>
       </div>
-      <div>
+      <div className="icon">
         <Button
           type="link"
           shape="circle"
