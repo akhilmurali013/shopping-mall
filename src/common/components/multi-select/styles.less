@@ -1,0 +1,57 @@
+@import "app/App.less";
+
+.multi-select {
+    position: relative;
+    width: fit-content;
+    .multi-select-input {
+        width: 240px;
+    }
+    .multi-select-option-wrapper {
+        z-index: 10;
+        margin-top: 5px;
+        position: absolute;
+        min-width: 240px;
+        max-height: 350px;
+        overflow-y: auto;
+        border: 1px solid @gray-200;
+        border-radius: 8px;
+        .selected-option {
+          background-color: @primary-25;
+          .icon {
+            color: @primary-600;
+          }
+        }
+        .multi-select-options {
+            background: white;
+            padding: 10px 14px;
+            border-bottom: 1px solid @gray-300;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &:hover {
+                background-color: @gray-50;
+            }
+        }
+    }
+}
+
+.options-selected-wrapper {
+    margin-top: 16px;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    .selected-option-item {
+        border: none;
+        white-space: nowrap;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 10px;
+        align-items: center;
+        padding: 15px;
+        border-radius: 8px;
+        color: @primary-700;
+        background-color: @primary-25;
+    }
+}

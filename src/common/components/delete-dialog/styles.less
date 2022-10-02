@@ -1,0 +1,41 @@
+@import "app/App.less";
+
+.dialog-root-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(52, 64, 84, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialog-container {
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    .header {
+        margin: 20px 0px 8px 0px;
+        font-size: 18px;
+        font-weight: 500px;
+        color: @gray-900;
+    }
+    .description {
+        color: @gray-500;
+    }
+    .actions {
+        margin-top: 32px;
+        display: flex;
+        flex-flow: row;
+        gap: 12px
+    }
+}
+.ant-btn-dangerous {
+    background-color: @error-600 !important;
+}

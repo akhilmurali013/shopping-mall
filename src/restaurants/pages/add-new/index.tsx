@@ -4,6 +4,7 @@ import { Button } from "antd";
 
 import BreadCrumps from "common/components/bread-crumps";
 import ModuleLayout from "common/components/module-layout";
+import RestaurantForm from "restaurants/components/restaurant-form";
 
 import "./styles.less";
 
@@ -16,6 +17,7 @@ const RestaurantDetails: React.FC = () => (
         Save Details
       </Button>
     </ModuleLayout.Header>
+    <RestaurantForm />
   </ModuleLayout>
 );
 

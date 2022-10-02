@@ -25,6 +25,7 @@ module.exports = {
     "gray-900": "#101828",
     "error-50": "#FEF3F2",
     "error-500": "#F04438",
+    "error-600": "#D92D20",
     "error-700": "#B42318",
     "warning-50": "#FFFAEB",
     "warning-500": "#F79009",

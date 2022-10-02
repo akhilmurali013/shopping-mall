@@ -56,8 +56,6 @@ const useModules = () => {
 
 const App: React.FC = () => {
   const modules = useModules();
-
-  console.log({ modules });
   return (
     <div className="app-layout">
       <SideBar />

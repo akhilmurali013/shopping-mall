@@ -11,7 +11,9 @@ const Table: React.FC<TableProps<Record<string, unknown>>> = ({ ...props }) => (
     {...props}
     className="table"
     pagination={
-      typeof props.pagination === "object"
+      (props?.dataSource?.length ?? 0) <= 10
+        ? false
+        : typeof props.pagination === "object"
         ? {
             ...props.pagination,
             position: ["bottomCenter"],

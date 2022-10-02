@@ -1,0 +1,26 @@
+@import "app/App.less";
+
+.table-form {
+    width: 100%;
+    display: table;
+    .table-body {
+        display: table-row-group;
+        .table-row {
+            display: table-row;
+            .table-label-cell {
+              width: 25%;
+              border-top: 1px solid @gray-200;
+              display: table-cell;
+              padding-top: 20px;
+              vertical-align: top;
+            }
+            .table-value-cell {
+              width: 75%;
+              border-top: 1px solid @gray-200;
+              display: table-cell;
+              padding: 20px 10% 0px 0px;
+              vertical-align: top;
+            }
+        }
+    }
+}
