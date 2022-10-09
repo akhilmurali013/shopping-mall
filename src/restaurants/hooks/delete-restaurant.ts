@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 
+import { Restaurant } from "app/types/restaurant";
 import axiosInstance from "axios-instance";
-import { Restaurant } from "types";
 
 const removeRestaurant = ({
   id,

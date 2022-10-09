@@ -21,14 +21,14 @@ const useModules = () => {
       const modules = registeredModules.map((module) => {
         if (module.nav.children) {
           return module.nav.children.map((child) => ({
-            path: `${module.nav.route}/${child.route}`,
+            path: child.route,
             elementPath: child.folderPath,
           }));
         }
         if (module.nav.folderPath) {
           return [
             {
-              path: module.nav.route,
+              path: module.nav.route as string,
               elementPath: module.nav.folderPath,
             },
           ];

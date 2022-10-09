@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Button } from "antd";
 
+import { Restaurant } from "app/types/restaurant";
 import DeleteDialog from "common/components/delete-dialog";
 import Icon from "common/components/icon";
 import ModuleLayout from "common/components/module-layout";
@@ -15,7 +16,6 @@ import {
   useGetRestaurants,
 } from "restaurants/hooks";
 import routes from "restaurants/routes";
-import { Restaurant } from "types";
 
 import "./styles.less";
 

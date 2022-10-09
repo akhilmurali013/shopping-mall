@@ -14,6 +14,7 @@ export interface ModuleConfig {
   id: string;
   nav: {
     defaultName: string;
+    // undefined if there is submodules
     route: string;
     icon: IconConfig;
     // should be available if there is submodules

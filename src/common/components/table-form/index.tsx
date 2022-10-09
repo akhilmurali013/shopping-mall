@@ -16,8 +16,8 @@ const Item: React.FC<
 > = ({ label, subLabel, children }) => (
   <div className="table-row">
     <div className="table-label-cell">
-      {label}
-      {subLabel}
+      <div>{label}</div>
+      <div className="table-label-cell-description">{subLabel}</div>
     </div>
     <div className="table-value-cell">{children}</div>
   </div>

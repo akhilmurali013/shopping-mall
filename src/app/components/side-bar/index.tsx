@@ -64,7 +64,7 @@ const NavItemNestedTabs: React.FC<{ module: ModuleConfig }> = ({ module }) => {
             <NavLinkItem
               key={child.defaultName}
               name={child.defaultName}
-              path={`${module.nav.route}/${child.route}`}
+              path={child.route}
             />
           ))}
         </>
@@ -76,7 +76,7 @@ const NavItemNestedTabs: React.FC<{ module: ModuleConfig }> = ({ module }) => {
 const NavItem: React.FC<{ module: ModuleConfig }> = ({ module }) => (
   <NavLinkItem
     name={module.nav.defaultName}
-    path={module.nav.route}
+    path={module.nav.route as string}
     icon={<Icon {...module.nav.icon} />}
   />
 );

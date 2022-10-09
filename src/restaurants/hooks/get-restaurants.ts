@@ -1,13 +1,14 @@
 import { useQuery } from "react-query";
 
+import { Restaurant } from "app/types/restaurant";
 import axiosInstance from "axios-instance";
-import { Restaurant } from "types";
 
 const getRestaurants = (): Promise<{ restaurants: Restaurant[] }> =>
   axiosInstance.post("/restaurants");
 
 const useGetRestaurants = () =>
   useQuery("get-restaurants", getRestaurants, {
+    // remove the initial data
     initialData: {
       restaurants: [
         {

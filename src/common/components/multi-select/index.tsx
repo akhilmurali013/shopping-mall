@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 
 import { useClickAway } from "ahooks";
-import { Input } from "antd";
+import { Input, InputProps } from "antd";
 
 import Icon from "../icon";
 
@@ -11,29 +11,38 @@ const SelectedOption: React.FC<{
   value: string;
   label: string;
   onClick: (v: string) => void;
-}> = ({ label, value, onClick }) => (
+  disabled?: boolean;
+}> = ({ label, value, onClick, disabled = false }) => (
   <button
     type="button"
     className="selected-option-item"
     onClick={() => onClick(value)}
+    disabled={disabled}
   >
     {label}
     <Icon name="close" />
   </button>
 );
 
-const MultiSelect: React.FC<{
-  options?: { label: string; value: string }[];
-  values?: string[];
-  removeSelectedOptions?: boolean;
-  onOptionSelect: (v: string) => void;
-  onOptionDeselect: (v: string) => void;
-}> = ({
+const MultiSelect: React.FC<
+  InputProps & {
+    options?: { label: string; value: string }[];
+    values?: string[];
+    removeSelectedOptions?: boolean;
+    onOptionSelect: (v: string) => void;
+    onOptionDeselect: (v: string) => void;
+    wrapperStyles?: React.CSSProperties;
+    disabled?: boolean;
+  }
+> = ({
   options,
   values,
   removeSelectedOptions,
   onOptionSelect,
   onOptionDeselect,
+  wrapperStyles,
+  disabled,
+  ...props
 }) => {
   const [searchString, setSearchString] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -88,7 +97,7 @@ const MultiSelect: React.FC<{
   }, []);
 
   return (
-    <div ref={ref} className="multi-select">
+    <div ref={ref} className="multi-select" style={wrapperStyles}>
       <Input
         className="multi-select-input"
         size="large"
@@ -97,8 +106,9 @@ const MultiSelect: React.FC<{
         value={searchString}
         onChange={updateSearchString}
         onFocus={onFocus}
+        {...props}
       />
-      {showDropdown && (
+      {showDropdown && !disabled && (
         <div className="multi-select-option-wrapper">
           {filteredOptionsProcessed?.map((v) => (
             <div
@@ -121,16 +131,19 @@ const MultiSelect: React.FC<{
           ))}
         </div>
       )}
-      <div className="options-selected-wrapper">
-        {selectedOptions?.map((option) => (
-          <SelectedOption
-            key={option.value}
-            value={option.value}
-            label={option.label}
-            onClick={onOptionDeselect}
-          />
-        ))}
-      </div>
+      {!!selectedOptions?.length && (
+        <div className="options-selected-wrapper">
+          {selectedOptions?.map((option) => (
+            <SelectedOption
+              key={option.value}
+              value={option.value}
+              label={option.label}
+              onClick={onOptionDeselect}
+              disabled={disabled}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

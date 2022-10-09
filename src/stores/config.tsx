@@ -1,19 +1,23 @@
 import { ModuleConfig } from "app/models/module-config";
 
+import storeRecordRotes from "./store-records/routes";
+
+export const root = "stores";
+
 const config: ModuleConfig = {
   id: "stores",
   nav: {
     defaultName: "Stores",
-    route: "stores",
     icon: { name: "shopping-bag" },
+    route: root,
     children: [
       {
-        route: "records",
+        route: `${root}/${storeRecordRotes.root}`,
         defaultName: "Store Records",
         folderPath: "stores/store-records",
       },
       {
-        route: "promoted-contents",
+        route: `${root}/promoted-contents`,
         defaultName: "Promoted Contents",
         folderPath: "stores/promoted-contents",
       },

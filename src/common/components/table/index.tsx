@@ -3,8 +3,9 @@ import React from "react";
 import { Table as AntDTable } from "antd";
 import type { TableProps } from "antd/es/table";
 
-import "./styles.less";
 import Icon from "../icon";
+
+import "./styles.less";
 
 const Table: React.FC<TableProps<Record<string, unknown>>> = ({ ...props }) => (
   <AntDTable
@@ -13,7 +14,7 @@ const Table: React.FC<TableProps<Record<string, unknown>>> = ({ ...props }) => (
     pagination={
       (props?.dataSource?.length ?? 0) <= 10
         ? false
-        : typeof props.pagination === "object"
+        : ["object", "undefined"].includes(typeof props.pagination)
         ? {
             ...props.pagination,
             position: ["bottomCenter"],

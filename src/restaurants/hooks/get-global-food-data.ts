@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 
 import { useQuery } from "react-query";
 
-import axiosInstance from "axios-instance";
 import {
   CuisineStyle,
   CuisineType,
   DishCategory,
   DishType,
   FloorInfo,
-} from "types";
+} from "app/types";
+import axiosInstance from "axios-instance";
 
 type GlobalData = {
   dishCategories: DishCategory[];
@@ -38,57 +38,7 @@ const useFoodGlobalData = () => {
     cuisineTypes: {},
     floorInfo: {},
   });
-  const { data, isLoading } = useQuery("get-global-data", getFoodGlobalData, {
-    initialData: {
-      dishCategories: [
-        {
-          dishCategoryId: 123,
-          categoryName: "Biriyani",
-          dishCategoryImageUrl: "https://aws.proximety.io/s3/image1.jpg",
-        },
-      ],
-      dishTypes: [
-        {
-          dishTypeId: 123,
-          dishTypeName: "Main course",
-        },
-      ],
-      cuisineStyles: [
-        {
-          cuisineStyleId: 123,
-          cuisineStyleName: "Arabic",
-        },
-        {
-          cuisineStyleId: 124,
-          cuisineStyleName: "South indian",
-        },
-        {
-          cuisineStyleId: 125,
-          cuisineStyleName: "Shawarma",
-        },
-        {
-          cuisineStyleId: 126,
-          cuisineStyleName: "Burger",
-        },
-        {
-          cuisineStyleId: 127,
-          cuisineStyleName: "Fried Chicken",
-        },
-      ],
-      cuisineTypes: [
-        {
-          cuisineTypeId: 123,
-          cuisineTypeName: "Veg",
-        },
-      ],
-      floorInfo: [
-        {
-          floorId: 123,
-          floorName: "First Floor",
-        },
-      ],
-    },
-  });
+  const { data, isLoading } = useQuery("get-global-data", getFoodGlobalData);
 
   useEffect(() => {
     setMappedData({

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CuisineStyle } from "types";
+import { CuisineStyle } from "app/types";
 
 import "./styles.less";
 
