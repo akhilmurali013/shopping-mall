@@ -7,6 +7,7 @@ import { ReactComponent as Check } from "./check.svg";
 import { ReactComponent as Close } from "./close.svg";
 import { ReactComponent as Filter } from "./filter.svg";
 import { ReactComponent as Logout } from "./logout.svg";
+import { ReactComponent as LoudSpeaker } from "./loud-speaker.svg";
 import { ReactComponent as Pencil } from "./pencil.svg";
 import { ReactComponent as Plus } from "./plus.svg";
 import { ReactComponent as Right } from "./right.svg";
@@ -24,6 +25,7 @@ const icons: {
   close: Close,
   filter: Filter,
   logout: Logout,
+  "loud-speaker": LoudSpeaker,
   pencil: Pencil,
   plus: Plus,
   right: Right,

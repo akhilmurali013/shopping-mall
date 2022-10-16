@@ -4,15 +4,14 @@ import { useDeepCompareEffect } from "ahooks";
 import { Button, Form, Input } from "antd";
 
 import { StoreCatagories } from "app/types/store";
+import FormItemImageUpload from "common/components/form-item-image-upload";
 import ModuleLayout from "common/components/module-layout";
 import TableForm from "common/components/table-form";
 
 import BankDetails from "./components/bank-details";
-import BrandLogo from "./components/brand-logo";
 import StoreCatagoriesSelector from "./components/category-select";
 import LocationSelector from "./components/floor-select";
 import PhoneNumberInput from "./components/phone-number-input";
-import StoreImage from "./components/store-image";
 import StoreTimingSelect from "./components/store-timing-select";
 
 import "./styles.less";
@@ -79,6 +78,8 @@ const StoreForm: React.FC<{
           : [""],
       });
       form.validateFields();
+    } else {
+      form.setFieldsValue({ phoneNumbers: [""] });
     }
   }, [form, defaultValues]);
 
@@ -175,13 +176,13 @@ const StoreForm: React.FC<{
             label="Brand Logo"
             subLabel="This image will come in store cards and detail page"
           >
-            <BrandLogo />
+            <FormItemImageUpload name="brandLogo" />
           </TableForm.Item>
           <TableForm.Item
             label="Store Image"
             subLabel="This image will come in store cards"
           >
-            <StoreImage />
+            <FormItemImageUpload name="storeImage" />
           </TableForm.Item>
           <TableForm.Item label="Store timing">
             <StoreTimingSelect />

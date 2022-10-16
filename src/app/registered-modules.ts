@@ -1,4 +1,5 @@
 import analyticsConfig from "analytics/config";
+import eventsConfig from "events/config";
 import restaurantConfig from "restaurants/config";
 import storeConfig from "stores/config";
 
@@ -8,5 +9,6 @@ const registeredModules: ModuleConfig[] = [
   analyticsConfig,
   storeConfig,
   restaurantConfig,
+  eventsConfig,
 ];
 export default registeredModules;

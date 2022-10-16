@@ -1,0 +1,20 @@
+@import "app/App.less";
+
+.custom {
+    border: 1px solid @gray-300;
+    border-radius: 8px;
+    overflow: hidden;
+    .ant-radio-wrapper-in-form-item {
+        margin: 0px !important;
+        padding: 12px 18px !important;
+        border-right: 1px solid @gray-300 !important;
+        &:last-of-type {
+            border-right: none !important;
+        }
+    }
+    .ant-radio-wrapper-checked {
+        background-color: @primary-50;
+        color: @primary-600;
+    }
+}
+
