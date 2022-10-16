@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 
+import { useDeepCompareEffect } from "ahooks";
 import { Button, Form, Input } from "antd";
 
 import { StoreCatagories } from "app/types/store";
@@ -55,6 +56,7 @@ const StoreForm: React.FC<{
   onSubmit?: (v: StoreFormValues) => void;
   defaultValues?: Partial<StoreFormValues>;
   variant: "form" | "view";
+  loading?: boolean;
 }> = ({
   submitButtonText,
   cancelButton,
@@ -62,10 +64,23 @@ const StoreForm: React.FC<{
   onSubmit,
   defaultValues,
   variant,
+  loading,
 }) => {
   const disabled = useMemo(() => variant === "view", [variant]);
 
   const [form] = Form.useForm<StoreFormValues>();
+
+  useDeepCompareEffect(() => {
+    if (defaultValues) {
+      form.setFieldsValue({
+        ...defaultValues,
+        phoneNumbers: defaultValues?.phoneNumbers?.length
+          ? defaultValues.phoneNumbers
+          : [""],
+      });
+      form.validateFields();
+    }
+  }, [form, defaultValues]);
 
   return (
     <div>
@@ -73,6 +88,7 @@ const StoreForm: React.FC<{
         {cancelButton}
         {variant === "form" && (
           <Button
+            loading={loading}
             size="large"
             type="primary"
             htmlType="button"
@@ -84,17 +100,7 @@ const StoreForm: React.FC<{
         )}
       </ModuleLayout.Header>
 
-      <Form
-        form={form}
-        onFinish={onSubmit}
-        initialValues={{
-          ...defaultValues,
-          phoneNumbers: defaultValues?.phoneNumbers?.length
-            ? defaultValues.phoneNumbers
-            : [""],
-        }}
-        disabled={disabled}
-      >
+      <Form form={form} onFinish={onSubmit} disabled={disabled}>
         <TableForm.Layout>
           <TableForm.Item label="Store name">
             <Form.Item

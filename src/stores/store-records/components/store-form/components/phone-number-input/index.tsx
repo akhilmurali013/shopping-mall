@@ -32,7 +32,6 @@ const PhoneNumberInput: React.FC = () => (
                 rules={[
                   {
                     required: true,
-                    whitespace: true,
                     message:
                       "Please input a valid phone number or delete this field.",
                   },
@@ -46,8 +45,8 @@ const PhoneNumberInput: React.FC = () => (
           </Form.Item>
         ))}
         <Form.Item noStyle>
-          <Button onClick={() => add()} size="large" block>
-            Add field
+          <Button onClick={() => add()} size="large">
+            Add another number
           </Button>
         </Form.Item>
       </>

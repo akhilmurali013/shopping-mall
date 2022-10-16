@@ -62,7 +62,12 @@ const ListOfRestaurants: React.FC = () => {
     () =>
       // eslint-disable-next-line no-underscore-dangle
       data?.data?._embedded?.stores?.map((store) => ({
-        storeName: <div>{store?.name}</div>,
+        storeName: (
+          <div>
+            <img src={store?.brandLogo} alt={`${store.name} logo`} />
+            {store?.name}
+          </div>
+        ),
         ownerName: store?.ownerName,
         location: store?.location?.name,
         category: (
@@ -91,7 +96,9 @@ const ListOfRestaurants: React.FC = () => {
             <button
               type="button"
               className="action-button"
-              onClick={() => navigate(`${routes.details}/:id/${routes.edit}`)}
+              onClick={() =>
+                navigate(`${routes.details}/${store?.storeId}/${routes.edit}`)
+              }
             >
               <Icon name="pencil" />
             </button>

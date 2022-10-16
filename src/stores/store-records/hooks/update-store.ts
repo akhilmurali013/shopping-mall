@@ -72,24 +72,29 @@ const useUpdateStore = (storeId?: string) => {
 
   const update = async (v: StoreFormValues) => {
     if (storeId) {
-      await updateMutation.mutateAsync({
+      const updatedData = await updateMutation.mutateAsync({
         storeId,
         storeValues: storeFormDataToRequestData(v),
       });
-      if (v?.brandLogo?.blob) {
-        await updateImage.mutateAsync({
-          storeId,
-          imageCategory: ImageCategory.BRAND_IMAGE,
-          file: v?.brandLogo?.blob,
-        });
-        if (v?.storeImage?.blob)
+      try {
+        if (v?.brandLogo?.blob) {
           await updateImage.mutateAsync({
             storeId,
-            imageCategory: ImageCategory.STORE_IMAGE,
-            file: v?.storeImage?.blob,
+            imageCategory: ImageCategory.BRAND_IMAGE,
+            file: v?.brandLogo?.blob,
           });
+          if (v?.storeImage?.blob)
+            await updateImage.mutateAsync({
+              storeId,
+              imageCategory: ImageCategory.STORE_IMAGE,
+              file: v?.storeImage?.blob,
+            });
+        }
+      } finally {
+        if (updatedData?.data?.storeId) {
+          navigate(`/a/${root}/${routes.root}/${storeId}/${routes.details}`);
+        }
       }
-      navigate(`/a/${root}/${routes.root}/${storeId}/${routes.details}`);
     }
   };
 
