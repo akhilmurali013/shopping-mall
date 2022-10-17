@@ -9,13 +9,19 @@ import BreadCrumps from "common/components/bread-crumps";
 import Loader from "common/components/loader";
 import ModuleLayout from "common/components/module-layout";
 import StoreForm from "stores/store-records/components/store-form";
-import { useGetStoreDetails, useUpdateStore } from "stores/store-records/hooks";
+import {
+  useGetBankDetails,
+  useGetStoreDetails,
+  useUpdateStore,
+} from "stores/store-records/hooks";
 import mapStoreDataToFromData from "stores/store-records/services/map-store-data-to-from-data";
 
 const EditStoreDetails: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading } = useGetStoreDetails(id);
+  const { data: bankDetails, isLoading: bankDetailsLoading } =
+    useGetBankDetails(id);
   const { update, isLoading: updating } = useUpdateStore(id);
 
   const store = data?.data;
@@ -24,7 +30,7 @@ const EditStoreDetails: React.FC = () => {
     <>
       <ModuleLayout>
         <BreadCrumps pathItems={["Store Records", "details"]} />
-        {isLoading && <Loader />}
+        {(isLoading || bankDetailsLoading) && <Loader />}
         {store && (
           <StoreForm
             formName={store?.name ?? ""}
@@ -35,7 +41,10 @@ const EditStoreDetails: React.FC = () => {
             }
             submitButtonText="Save Details"
             onSubmit={update}
-            defaultValues={mapStoreDataToFromData(store as Store)}
+            defaultValues={mapStoreDataToFromData(
+              store as Store,
+              bankDetails?.data
+            )}
             variant="form"
             loading={updating}
           />

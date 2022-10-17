@@ -12,7 +12,11 @@ import ModuleLayout from "common/components/module-layout";
 import { root } from "stores/config";
 import StoreDeleteModal from "stores/store-records/components/store-delete-modal";
 import StoreForm from "stores/store-records/components/store-form";
-import { useDeleteStore, useGetStoreDetails } from "stores/store-records/hooks";
+import {
+  useDeleteStore,
+  useGetBankDetails,
+  useGetStoreDetails,
+} from "stores/store-records/hooks";
 import routes from "stores/store-records/routes";
 import mapStoreDataToFromData from "stores/store-records/services/map-store-data-to-from-data";
 
@@ -21,6 +25,8 @@ const ViewStoreDetails: React.FC = () => {
   const navigate = useNavigate();
   const [showDeleteModal, toggleDeleteModal] = useState(false);
   const { data, isLoading } = useGetStoreDetails(id);
+  const { data: bankDetails, isLoading: bankDetailsLoading } =
+    useGetBankDetails(id);
   const { mutateAsync: deleteStore, isLoading: storeDeleting } =
     useDeleteStore();
 
@@ -30,7 +36,7 @@ const ViewStoreDetails: React.FC = () => {
     <>
       <ModuleLayout>
         <BreadCrumps pathItems={["Store Records", "details"]} />
-        {isLoading && <Loader />}
+        {(isLoading || bankDetailsLoading) && <Loader />}
         {data?.data && (
           <StoreForm
             formName={store?.name ?? ""}
@@ -49,7 +55,10 @@ const ViewStoreDetails: React.FC = () => {
                 </Button>
               </>
             }
-            defaultValues={mapStoreDataToFromData(data?.data as Store)}
+            defaultValues={mapStoreDataToFromData(
+              data?.data as Store,
+              bankDetails?.data
+            )}
             variant="view"
           />
         )}

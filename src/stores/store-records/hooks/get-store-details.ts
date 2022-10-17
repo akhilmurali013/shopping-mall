@@ -7,6 +7,8 @@ const getStore = (storeId?: string) =>
   axiosInstance.get<Store>(`/stores/${storeId}`);
 
 const useGetStoreDetails = (storeId?: string) =>
-  useQuery(["get-store-details", storeId], () => getStore(storeId));
+  useQuery(["get-store-details", storeId], () => getStore(storeId), {
+    enabled: !!storeId,
+  });
 
 export default useGetStoreDetails;

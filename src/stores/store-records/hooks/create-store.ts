@@ -10,6 +10,8 @@ import { StoreFormValues } from "stores/store-records/components/store-form";
 import routes from "stores/store-records/routes";
 import storeFormDataToRequestData from "stores/store-records/services/store-form-data-to-request-data";
 
+import useBankDetailsUpdate from "./update-bank-details";
+
 export type CreateStoreType = {
   name: string;
   description: string;
@@ -64,6 +66,7 @@ const uploadStoreImages = ({
 
 const useCreateStore = () => {
   const navigate = useNavigate();
+  const { mutateAsync: updateBankDetails } = useBankDetailsUpdate();
   const createMutation = useMutation(createStore);
   const updateImage = useMutation(uploadStoreImages);
 
@@ -86,7 +89,14 @@ const useCreateStore = () => {
           imageCategory: ImageCategory.STORE_IMAGE,
           file: v?.storeImage?.blob as File,
         });
-        await Promise.all([updateBrandImage, updateStoreImage]);
+
+        const updateBank = updateBankDetails({
+          storeId: storeData?.data?.storeId,
+          accountName: v?.bankDetails?.accountName,
+          accountNumber: v?.bankDetails?.accountNumber,
+          upiId: v?.bankDetails?.upiId,
+        });
+        await Promise.all([updateBrandImage, updateStoreImage, updateBank]);
       }
     } catch {
       // error handling

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 
 import { useDeepCompareEffect } from "ahooks";
 import { Button, Form, Input } from "antd";
+import { Moment } from "moment";
 
 import { EventType } from "app/types/events";
 import FormItemImageUpload from "common/components/form-item-image-upload";
@@ -12,17 +13,19 @@ import TableForm from "common/components/table-form";
 import DateInput from "./components/date-input";
 import TimeInput from "./components/time-input";
 
+import "./styles.less";
+
 const { TextArea } = Input;
 
-export type StoreFormValues = {
+export type EventFormValues = {
   eventType: EventType;
   name: string;
   description: string;
   date: {
-    startDate: string;
-    endDate: string;
+    startDate: Moment;
+    endDate?: Moment;
   };
-  time: {
+  time?: {
     startTime: string;
     endTime: string;
   };
@@ -40,8 +43,8 @@ const EventForm: React.FC<{
   submitButtonText?: string;
   cancelButton?: React.ReactNode;
   formName: string;
-  onSubmit?: (v: StoreFormValues) => void;
-  defaultValues?: Partial<StoreFormValues>;
+  onSubmit?: (v: EventFormValues) => void;
+  defaultValues?: Partial<EventFormValues>;
   variant: "form" | "view";
   loading?: boolean;
 }> = ({
@@ -55,7 +58,7 @@ const EventForm: React.FC<{
 }) => {
   const disabled = useMemo(() => variant === "view", [variant]);
 
-  const [form] = Form.useForm<StoreFormValues>();
+  const [form] = Form.useForm<EventFormValues>();
 
   useDeepCompareEffect(() => {
     if (defaultValues) {
@@ -133,13 +136,13 @@ const EventForm: React.FC<{
             label="Event Poster"
             subLabel="This image will come in Event cards"
           >
-            <FormItemImageUpload name="poster" required={false} />
+            <FormItemImageUpload name="poster" />
           </TableForm.Item>
           <TableForm.Item
             label="Event Banner"
             subLabel="This image will come in Event detail page"
           >
-            <FormItemImageUpload name="banner" required={false} />
+            <FormItemImageUpload name="banner" />
           </TableForm.Item>
         </TableForm.Layout>
       </Form>

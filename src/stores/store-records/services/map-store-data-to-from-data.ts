@@ -1,7 +1,11 @@
+import { BankAccount } from "app/types";
 import { Store } from "app/types/store";
 import { StoreFormValues } from "stores/store-records/components/store-form"; // components/store-form";
 
-export default (v: Store): Partial<StoreFormValues> => ({
+export default (
+  v: Store,
+  bankDetails?: BankAccount
+): Partial<StoreFormValues> => ({
   storeName: v.name,
   ownerName: v.ownerName ?? "",
   phoneNumbers: v.phoneNumbers?.map((phone) => phone.phoneNumber) ?? [],
@@ -17,9 +21,9 @@ export default (v: Store): Partial<StoreFormValues> => ({
     close: v?.storeTimings?.closingTime,
   },
   bankDetails: {
-    accountName: "",
-    accountNumber: "",
-    upiId: "",
+    accountName: bankDetails?.accountName ?? "",
+    accountNumber: bankDetails?.accountNumber ?? "",
+    upiId: bankDetails?.upiId ?? "",
   },
   brandLogo: {
     url: v.brandLogoUrl,

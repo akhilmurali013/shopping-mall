@@ -11,6 +11,14 @@ type StoreTiming = {
   closingTime: string;
 };
 
+export type BankDetails = {
+  id: string;
+  storeId: string;
+  accountNumber: string;
+  accountName: string;
+  upiId: string;
+};
+
 export type Store = {
   storeId: string;
   name: string;

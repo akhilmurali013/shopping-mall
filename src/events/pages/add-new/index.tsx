@@ -7,6 +7,7 @@ import { Button } from "antd";
 import BreadCrumps from "common/components/bread-crumps";
 import ModuleLayout from "common/components/module-layout";
 import EventForm from "events/components/events-form";
+import { useCreateEvent } from "events/hooks";
 
 const CancelButton: React.FC = () => {
   const navigate = useNavigate();
@@ -17,8 +18,8 @@ const CancelButton: React.FC = () => {
   );
 };
 
-// eslint-disable-next-line arrow-body-style
 const AddNewEvent: React.FC = () => {
+  const { create, creating } = useCreateEvent();
   return (
     <ModuleLayout>
       <BreadCrumps pathItems={["Events", "new"]} />
@@ -26,8 +27,9 @@ const AddNewEvent: React.FC = () => {
         formName="Add New Event"
         cancelButton={<CancelButton />}
         submitButtonText="Create"
-        // onSubmit={console.log}
+        onSubmit={create}
         variant="form"
+        loading={creating}
       />
     </ModuleLayout>
   );

@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button, Image } from "antd";
-import format from "date-fns/format";
+import moment from "moment";
 
 import { Event, EventStatus, EventType } from "app/types/events";
 import Icon from "common/components/icon";
@@ -15,6 +15,8 @@ import { useDeleteEvent, useGetEvents } from "events/hooks";
 import routes from "events/routes";
 
 import EventFilters from "./components/event-filters";
+
+import "./styles.less";
 
 export type EventFilterType = {
   query?: string;
@@ -59,12 +61,11 @@ const getEventDate = ({
   endDate: string;
 }) => {
   if (eventType === EventType.ALL_DAY || startDate === endDate) {
-    return format(new Date(startDate), "dd/MM/yyyy");
+    return moment(new Date(startDate)).format("dd/MM/yyyy");
   }
-  return `${format(new Date(startDate), "dd/MM/yyyy")} - ${format(
-    new Date(endDate),
-    "dd/MM/yyyy"
-  )}`;
+  return `${moment(new Date(startDate)).format("dd/MM/yyyy")} - ${moment(
+    new Date(endDate)
+  ).format("dd/MM/yyyy")}`;
 };
 
 const getEventTime = ({
@@ -77,12 +78,11 @@ const getEventTime = ({
   endDate: string;
 }) => {
   if (eventType === EventType.ALL_DAY || startDate === endDate) {
-    return format(new Date(startDate), "h:mm aaa");
+    return moment(new Date(startDate)).format("h:mm aaa");
   }
-  return `${format(new Date(startDate), "h:mm aaa")} - ${format(
-    new Date(endDate),
-    "h:mm aaa"
-  )}`;
+  return `${moment(new Date(startDate)).format("h:mm aaa")} - ${moment(
+    new Date(endDate)
+  ).format("h:mm aaa")}`;
 };
 
 const EventList: React.FC = () => {
