@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { Button, Image } from "antd";
+import { Button } from "antd";
 import moment from "moment";
 
 import { Event, EventStatus, EventType } from "app/types/events";
@@ -61,11 +61,11 @@ const getEventDate = ({
   endDate: string;
 }) => {
   if (eventType === EventType.ALL_DAY || startDate === endDate) {
-    return moment(new Date(startDate)).format("dd/MM/yyyy");
+    return moment(new Date(startDate)).format("DD/MM/yyyy");
   }
-  return `${moment(new Date(startDate)).format("dd/MM/yyyy")} - ${moment(
+  return `${moment(new Date(startDate)).format("DD/MM/yyyy")} - ${moment(
     new Date(endDate)
-  ).format("dd/MM/yyyy")}`;
+  ).format("DD/MM/yyyy")}`;
 };
 
 const getEventTime = ({
@@ -78,11 +78,12 @@ const getEventTime = ({
   endDate: string;
 }) => {
   if (eventType === EventType.ALL_DAY || startDate === endDate) {
-    return moment(new Date(startDate)).format("h:mm aaa");
+    return moment.utc(startDate).local().format("h:mm a");
   }
-  return `${moment(new Date(startDate)).format("h:mm aaa")} - ${moment(
-    new Date(endDate)
-  ).format("h:mm aaa")}`;
+  return `${moment.utc(startDate).local().format("h:mm a")} - ${moment
+    .utc(endDate)
+    .local()
+    .format("h:mm a")}`;
 };
 
 const EventList: React.FC = () => {
@@ -97,11 +98,7 @@ const EventList: React.FC = () => {
     () =>
       data?.data?.eventsList?.map((event) => ({
         eventName: (
-          <div>
-            <Image height="40px" width="40px" src={event?.poster} />
-            &nbsp;
-            {event?.name}
-          </div>
+          <Table.CellWithImage imageUrl={event?.poster} text={event?.name} />
         ),
         date: getEventDate({
           eventType: event.eventType,

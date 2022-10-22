@@ -1,14 +1,13 @@
 import React from "react";
 
 import PromotedContentSection from "./components/sections";
-import { CardProps } from "./components/sections/card";
 import TryItOut from "./components/sections/try-it-out";
 
 type PromotedSectionType = {
   id: string;
   header: string;
   description: string;
-  Component: React.FC<CardProps>;
+  Component: React.FC;
 };
 
 const promotedSectionsList: PromotedSectionType[] = [

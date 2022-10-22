@@ -3,9 +3,10 @@ import React, { useMemo, useState } from "react";
 import ModuleLayout from "common/components/module-layout";
 
 import SectionFilters from "./components/promoted-content-filter";
+import Card from "./components/sections/card";
 import promotedContentSections from "./promoted-content-sections";
 
-// import "./styles.less";
+import "./styles.less";
 
 export type SectionFilterType = {
   query?: string;
@@ -39,14 +40,18 @@ const ListOfRestaurants: React.FC = () => {
           filters={sectionFilters}
           setFilters={setFilterChanges}
         />
-        {filteredSections?.map((Sec) => (
-          <Sec.Component
-            key={Sec.id}
-            id={Sec.id}
-            header={Sec.header}
-            description={Sec.description}
-          />
-        ))}
+        <div className="content-wrapper">
+          {filteredSections?.map((Sec) => (
+            <Card
+              key={Sec.id}
+              id={Sec.id}
+              header={Sec.header}
+              description={Sec.description}
+            >
+              <Sec.Component />
+            </Card>
+          ))}
+        </div>
       </ModuleLayout>
     </>
   );

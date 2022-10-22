@@ -63,10 +63,7 @@ const ListOfRestaurants: React.FC = () => {
       // eslint-disable-next-line no-underscore-dangle
       data?.data?._embedded?.stores?.map((store) => ({
         storeName: (
-          <div>
-            <img src={store?.brandLogo} alt={`${store.name} logo`} />
-            {store?.name}
-          </div>
+          <Table.CellWithImage imageUrl={store?.brandLogo} text={store?.name} />
         ),
         ownerName: store?.ownerName,
         location: store?.location?.name,

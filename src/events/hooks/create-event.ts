@@ -15,6 +15,7 @@ type EventCreateType = {
 };
 
 const createDateTime = (date: Moment, time?: string) => {
+  console.log({ date });
   const d = moment(date).startOf("day");
   if (time) {
     const [hour, minute] = time.split(":").map((v) => Number(v));
@@ -31,9 +32,15 @@ const mapFormDataToEventCreationType = (
   startDate: v?.date?.startDate
     ? createDateTime(v?.date?.startDate, v?.time?.startTime)
     : undefined,
-  endDate: v?.date?.endDate
-    ? createDateTime(v?.date?.endDate, v?.time?.endTime)
-    : undefined,
+  endDate:
+    v.eventType === EventType.ALL_DAY
+      ? createDateTime(v?.date?.startDate, "23:59")
+      : v?.date?.endDate
+      ? createDateTime(
+          v?.date?.endDate,
+          v.eventType === EventType.MULTI_DAY ? "23:59" : v?.time?.endTime
+        )
+      : undefined,
   description: v.description,
   eventType: v.eventType,
 });
@@ -44,9 +51,10 @@ const config = {
 
 const getFormData = (event: EventFormValues) => {
   const formData = new FormData();
-  Object.entries(mapFormDataToEventCreationType(event)).forEach((item) => {
-    formData.append(item[0], item[1] as string);
-  });
+  formData.append(
+    "Event",
+    JSON.stringify(mapFormDataToEventCreationType(event))
+  );
   if (event?.banner?.blob) {
     formData.append("banner", event.banner.blob);
   }

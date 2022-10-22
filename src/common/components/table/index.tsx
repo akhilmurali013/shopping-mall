@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Table as AntDTable } from "antd";
+import { Table as AntDTable, Image } from "antd";
 import type { TableProps } from "antd/es/table";
 
 import Icon from "../icon";
@@ -46,4 +46,19 @@ const Table: React.FC<TableProps<Record<string, unknown>>> = ({ ...props }) => (
   />
 );
 
-export default Table;
+const CellWithImage: React.FC<{
+  imageUrl: string;
+  text: string;
+}> = ({ imageUrl, text }) => (
+  <div className="cell-with-image">
+    {imageUrl && (
+      <>
+        <Image className="image" src={imageUrl} />
+        &nbsp;
+      </>
+    )}
+    {text}
+  </div>
+);
+
+export default Object.assign(Table, { CellWithImage });
