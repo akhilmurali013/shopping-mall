@@ -4,6 +4,8 @@ import { EventStatus, EventType } from "app/types/events";
 import axiosInstance from "axios-instance";
 import { EventFilterType } from "events/pages/event-list";
 
+export const GetEventsQueryId = "get-events";
+
 type EventListFetchType = {
   countInCurrentPage: number;
   totalCount: number;
@@ -28,6 +30,6 @@ const getEvents = (filters?: EventFilterType) =>
   });
 
 const useGetEvents = (filters?: EventFilterType) =>
-  useQuery(["get-events", filters], () => getEvents(filters));
+  useQuery([GetEventsQueryId, filters], () => getEvents(filters));
 
 export default useGetEvents;

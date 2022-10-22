@@ -5,7 +5,7 @@ import { Input } from "antd";
 import Icon from "common/components/icon";
 import Label from "common/components/label";
 import Select from "common/components/select";
-import promotedContentSections from "stores/promoted-contents/pages/list/promoted-content-sections";
+import promotedContentSections from "stores/promoted-contents/promoted-content-sections";
 
 import { SectionFilterType } from "../../index";
 

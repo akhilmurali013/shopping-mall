@@ -4,6 +4,8 @@ import { StoreCatagories } from "app/types/store";
 import axiosInstance from "axios-instance";
 import { StoreFilterType } from "stores/store-records/pages/store-list";
 
+export const GetStoresQueryId = "get-stores";
+
 type StoreListFetchType = {
   count: number;
   total: number;
@@ -38,6 +40,6 @@ const getStores = (filters?: StoreFilterType) =>
   });
 
 const useGetStores = (filters?: StoreFilterType) =>
-  useQuery(["get-stores", filters], () => getStores(filters));
+  useQuery([GetStoresQueryId, filters], () => getStores(filters));
 
 export default useGetStores;

@@ -17,6 +17,8 @@ module.exports = {
               "@text-color": theme.color["gray-700"],
               "@border-radius-base": theme["border-radius-base"],
               "@border-color-base": theme.color["gray-300"],
+              "@disabled-color": theme.color["gray-500"],
+              "@disabled-bg": theme.color["gray-50"],
             },
             javascriptEnabled: true,
           },

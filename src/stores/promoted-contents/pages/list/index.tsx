@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import ModuleLayout from "common/components/module-layout";
+import Card from "common/components/promoted-content/card";
+import promotedContentRoutes from "stores/promoted-contents/routes";
 
+import promotedContentSections from "../../promoted-content-sections";
 import SectionFilters from "./components/promoted-content-filter";
-import Card from "./components/sections/card";
-import promotedContentSections from "./promoted-content-sections";
-
-import "./styles.less";
 
 export type SectionFilterType = {
   query?: string;
@@ -14,6 +16,7 @@ export type SectionFilterType = {
 };
 
 const ListOfRestaurants: React.FC = () => {
+  const navigate = useNavigate();
   const [sectionFilters, setFilterChanges] = useState<SectionFilterType>();
 
   const filteredSections = useMemo(() => {
@@ -40,11 +43,15 @@ const ListOfRestaurants: React.FC = () => {
           filters={sectionFilters}
           setFilters={setFilterChanges}
         />
-        <div className="content-wrapper">
+        <div>
           {filteredSections?.map((Sec) => (
             <Card
               key={Sec.id}
-              id={Sec.id}
+              onEditClick={() =>
+                navigate(
+                  `${promotedContentRoutes.sectionDetails}/${Sec.id}/${promotedContentRoutes.edit}`
+                )
+              }
               header={Sec.header}
               description={Sec.description}
             >

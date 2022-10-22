@@ -85,21 +85,23 @@ const StoreForm: React.FC<{
 
   return (
     <div>
-      <ModuleLayout.Header header={formName} className="module-header">
-        {cancelButton}
-        {variant === "form" && (
-          <Button
-            loading={loading}
-            size="large"
-            type="primary"
-            htmlType="button"
-            disabled={disabled}
-            onClick={form.submit}
-          >
-            {submitButtonText}
-          </Button>
-        )}
-      </ModuleLayout.Header>
+      <div className="store-form-module-header">
+        <ModuleLayout.Header header={formName}>
+          {cancelButton}
+          {variant === "form" && (
+            <Button
+              loading={loading}
+              size="large"
+              type="primary"
+              htmlType="button"
+              disabled={disabled}
+              onClick={form.submit}
+            >
+              {submitButtonText}
+            </Button>
+          )}
+        </ModuleLayout.Header>
+      </div>
 
       <Form form={form} onFinish={onSubmit} disabled={disabled}>
         <TableForm.Layout>

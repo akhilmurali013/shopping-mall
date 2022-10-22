@@ -8,9 +8,11 @@ import "./styles.less";
 
 const { Option } = AntDSelect;
 
+export type SelectOptionsType = { label: string; value: string | number };
+
 const Select: React.FC<
   SelectProps & {
-    options: { label: string; value: string | number }[];
+    options: SelectOptionsType[];
     value?: string | number;
   }
 > = ({ options, value, ...props }) => (

@@ -15,7 +15,6 @@ type EventCreateType = {
 };
 
 const createDateTime = (date: Moment, time?: string) => {
-  console.log({ date });
   const d = moment(date).startOf("day");
   if (time) {
     const [hour, minute] = time.split(":").map((v) => Number(v));

@@ -22,7 +22,7 @@ const StoreFilters: React.FC<{
   filters?: StoreFilterType;
   setFilters: React.Dispatch<React.SetStateAction<StoreFilterType | undefined>>;
 }> = ({ filters, setFilters }) => (
-  <div className="filter-form">
+  <div className="store-filter-form">
     <div className="filter-item">
       <Label>Search for Store</Label>
       <Input
