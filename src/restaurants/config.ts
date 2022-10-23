@@ -1,14 +1,22 @@
 import { ModuleConfig } from "app/models/module-config";
 
-import routes from "./routes";
+import restaurantRoutes from "./restaurant-records/routes";
+
+export const root = "restaurant";
 
 const config: ModuleConfig = {
   id: "restaurants",
   nav: {
     defaultName: "Restaurants",
-    route: routes.root,
+    route: root,
     icon: { name: "filter" },
-    folderPath: "restaurants",
+    children: [
+      {
+        route: `${root}/${restaurantRoutes.root}`,
+        defaultName: "Restaurant Records",
+        folderPath: "restaurants/restaurant-records",
+      },
+    ],
   },
 };
 
