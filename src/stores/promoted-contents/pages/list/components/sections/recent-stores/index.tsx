@@ -11,7 +11,6 @@ const RecentStoresList: React.FC = () => {
     () =>
       data?.data?.stores
         ?.slice(0, RecentlyLaunchedSection?.noOfItems)
-        ?.slice(0, RecentlyLaunchedSection?.noOfItems)
         .map((item, index) => ({
           position: index + 1,
           value: item?.name,
