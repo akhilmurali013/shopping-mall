@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Form } from "antd";
+import { NamePath } from "antd/lib/form/interface";
 
 import Select from "common/components/select";
 
@@ -12,9 +13,11 @@ const floorData = [
   { value: "4", label: "4th Floor" },
 ];
 
-const LocationSelector: React.FC = () => (
+const LocationSelector: React.FC<{
+  name: NamePath;
+}> = ({ name }) => (
   <Form.Item
-    name="location"
+    name={name}
     rules={[{ required: true, message: "Required field" }]}
   >
     <Select options={floorData} size="large" style={{ maxWidth: "240px" }} />

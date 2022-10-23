@@ -1,24 +1,3 @@
-export type DishCategory = {
-  dishCategoryId: number;
-  categoryName: string;
-  dishCategoryImageUrl: string;
-};
-
-export type DishType = {
-  dishTypeId: number;
-  dishTypeName: string;
-};
-
-export type CuisineStyle = {
-  cuisineStyleId: number;
-  cuisineStyleName: string;
-};
-
-export type CuisineType = {
-  cuisineTypeId: number;
-  cuisineTypeName: string;
-};
-
 export type FloorInfo = {
   floorId: number;
   name: string;

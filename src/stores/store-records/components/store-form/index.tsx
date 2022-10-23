@@ -4,15 +4,15 @@ import { useDeepCompareEffect } from "ahooks";
 import { Button, Form, Input } from "antd";
 
 import { StoreCatagories } from "app/types/store";
+import FloorSelector from "common/components/floor-selector";
 import FormItemImageUpload from "common/components/form-item-image-upload";
 import ModuleLayout from "common/components/module-layout";
+import PhoneNumberInput from "common/components/phone-number-input";
 import TableForm from "common/components/table-form";
+import TimeRangeSelect from "common/components/time-range-select";
 
 import BankDetails from "./components/bank-details";
 import StoreCatagoriesSelector from "./components/category-select";
-import LocationSelector from "./components/floor-select";
-import PhoneNumberInput from "./components/phone-number-input";
-import StoreTimingSelect from "./components/store-timing-select";
 
 import "./styles.less";
 
@@ -122,8 +122,8 @@ const StoreForm: React.FC<{
             </Form.Item>
           </TableForm.Item>
           <TableForm.Item label="Phone number">
-            <Form.Item name="phoneNumber">
-              <PhoneNumberInput />
+            <Form.Item name="phoneNumbers">
+              <PhoneNumberInput name="phoneNumbers" />
             </Form.Item>
           </TableForm.Item>
           <TableForm.Item label="Email Id">
@@ -146,7 +146,7 @@ const StoreForm: React.FC<{
             </Form.Item>
           </TableForm.Item>
           <TableForm.Item label="Location">
-            <LocationSelector />
+            <FloorSelector name="location" />
           </TableForm.Item>
           <TableForm.Item label="Categories">
             <StoreCatagoriesSelector />
@@ -187,7 +187,12 @@ const StoreForm: React.FC<{
             <FormItemImageUpload name="storeImage" />
           </TableForm.Item>
           <TableForm.Item label="Store timing">
-            <StoreTimingSelect />
+            <TimeRangeSelect
+              startTimeNamePath={["timing", "open"]}
+              endTimeNamePath={["timing", "close"]}
+              startTimeLabel="pening time"
+              closeTimeLabel="Close time"
+            />
           </TableForm.Item>
           <TableForm.Item label="Banking details">
             <BankDetails />

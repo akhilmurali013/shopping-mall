@@ -2,13 +2,15 @@ import React from "react";
 
 import { Form } from "antd";
 
-import ImageUpload from "common/components/image-upload";
+import FileUpload from "common/components/file-upload";
 
 const FormItemImageUpload: React.FC<{
   name: string;
   required?: boolean;
-  deleteImage?: () => void;
-}> = ({ name, required = true, deleteImage }) => (
+  deleteFile?: () => void;
+  defaultFileName: string;
+  isEditable: boolean;
+}> = ({ name, required = true, deleteFile, defaultFileName, isEditable }) => (
   <Form.Item
     name={name}
     rules={[
@@ -16,9 +18,12 @@ const FormItemImageUpload: React.FC<{
         validator: async (_, value) => {
           if (value?.blob) {
             if (
-              !["image/png", "image/jpeg", "image/jpg"].includes(
-                value?.blob?.type
-              )
+              ![
+                "application/pdf",
+                "image/png",
+                "image/jpeg",
+                "image/jpg",
+              ].includes(value?.blob?.type)
             )
               return Promise.reject(new Error("Unsupported format"));
           }
@@ -36,22 +41,23 @@ const FormItemImageUpload: React.FC<{
       noStyle
     >
       {({ getFieldValue, setFieldValue, validateFields }) => (
-        <ImageUpload
-          defaultImageUrl={getFieldValue([name, "url"]) ?? ""}
-          imageBlobUrl={
-            getFieldValue([name, "blob"])
-              ? URL.createObjectURL(getFieldValue([name, "blob"]))
-              : undefined
+        <FileUpload
+          defaultFileName={defaultFileName}
+          blob={getFieldValue([name, "blob"])}
+          defaultURL={getFieldValue([name, "url"]) ?? ""}
+          onDelete={
+            getFieldValue([name, "url"])
+              ? deleteFile
+              : () => {
+                  setFieldValue(name, {});
+                  validateFields([name]);
+                }
           }
           onChange={(info) => {
             setFieldValue([name, "blob"], info.file);
             validateFields([name]);
           }}
-          clearImage={() => {
-            setFieldValue(name, {});
-            validateFields([name]);
-          }}
-          deleteImage={getFieldValue([name, "url"]) ? deleteImage : undefined}
+          isEditable={isEditable}
         />
       )}
     </Form.Item>

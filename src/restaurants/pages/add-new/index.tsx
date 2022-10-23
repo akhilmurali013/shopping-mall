@@ -5,20 +5,31 @@ import { Button } from "antd";
 import BreadCrumps from "common/components/bread-crumps";
 import ModuleLayout from "common/components/module-layout";
 import RestaurantForm from "restaurants/components/restaurant-form";
+import {
+  useCreateRestaurant,
+  useRouteToRestaurantRoot,
+} from "restaurants/hooks";
 
-import "./styles.less";
-
-const RestaurantDetails: React.FC = () => (
-  <ModuleLayout>
-    <BreadCrumps pathItems={["Restaurant Records", "edit"]} />
-    <ModuleLayout.Header header="Almaaz Shawarma" className="module-header">
-      <Button size="large">Cancel</Button>
-      <Button size="large" type="primary">
-        Save Details
-      </Button>
-    </ModuleLayout.Header>
-    <RestaurantForm />
-  </ModuleLayout>
-);
+const RestaurantDetails: React.FC = () => {
+  const { create, isLoading } = useCreateRestaurant();
+  const routeToScreen = useRouteToRestaurantRoot();
+  return (
+    <ModuleLayout>
+      <BreadCrumps pathItems={["Restaurant Records", "edit"]} />
+      <RestaurantForm
+        submitButtonText="Create"
+        cancelButton={
+          <Button onClick={routeToScreen} size="large">
+            Cancel
+          </Button>
+        }
+        formName="Add New Restaurant"
+        onSubmit={create}
+        variant="create-form"
+        loading={isLoading}
+      />
+    </ModuleLayout>
+  );
+};
 
 export default RestaurantDetails;

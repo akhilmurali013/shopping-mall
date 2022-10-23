@@ -1,15 +1,19 @@
 import React from "react";
 
 import { Button, Form, Input } from "antd";
+import { NamePath } from "antd/lib/form/interface";
 
 // import Icon from 'common/components/icon';
 
 import "./styles.less";
 import Icon from "common/components/icon";
 
-const PhoneNumberInput: React.FC = () => (
+const PhoneNumberInput: React.FC<{
+  name: NamePath;
+  maximumAllowed?: number;
+}> = ({ name, maximumAllowed }) => (
   <Form.List
-    name="phoneNumbers"
+    name={name}
     rules={[
       {
         validator: async (_, names) => {
@@ -44,11 +48,13 @@ const PhoneNumberInput: React.FC = () => (
             </div>
           </Form.Item>
         ))}
-        <Form.Item noStyle>
-          <Button onClick={() => add()} size="large">
-            Add another number
-          </Button>
-        </Form.Item>
+        {(!maximumAllowed || fields?.length < maximumAllowed) && (
+          <Form.Item noStyle>
+            <Button onClick={() => add()} size="large">
+              Add another number
+            </Button>
+          </Form.Item>
+        )}
       </>
     )}
   </Form.List>
