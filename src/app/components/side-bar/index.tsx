@@ -11,6 +11,8 @@ import Logo from "common/components/hi-lite-logo";
 import Icon from "common/components/icon";
 import useUserStore from "common/store/useUserStore";
 
+import LogoutConfirmationModal from "../log-out-confirmation";
+
 import "./styles.less";
 
 const { Title, Text } = Typography;
@@ -104,31 +106,41 @@ const SideBarHeader: React.FC = () => (
 
 const SideBarFooter: React.FC = () => {
   const navigate = useNavigate();
+  const [showConfirmModal, toggleConfirmModal] = useState(false);
   const userDetails = useUserStore((state) => state.userDetails);
   const clearUserDetails = useUserStore((state) => state.clearUserDetails);
 
   const onLogout = () => {
     clearUserDetails();
+    toggleConfirmModal(false);
     navigate("/login");
   };
   return (
-    <div className="side-bar-footer">
-      <div>
-        <Title level={5} className="user-name">
-          {" "}
-          {userDetails?.firstName}
-        </Title>
-        <Text type="secondary">{userDetails?.email}</Text>
+    <>
+      <div className="side-bar-footer">
+        <div>
+          <Title level={5} className="user-name">
+            {" "}
+            {userDetails?.firstName}
+          </Title>
+          <Text type="secondary">{userDetails?.email}</Text>
+        </div>
+        <div className="icon">
+          <Button
+            type="link"
+            shape="circle"
+            icon={<Icon name="logout" />}
+            onClick={() => toggleConfirmModal(true)}
+          />
+        </div>
       </div>
-      <div className="icon">
-        <Button
-          type="link"
-          shape="circle"
-          icon={<Icon name="logout" />}
-          onClick={onLogout}
+      {showConfirmModal && (
+        <LogoutConfirmationModal
+          onClose={() => toggleConfirmModal(false)}
+          onDeleteClick={onLogout}
         />
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

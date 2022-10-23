@@ -17,6 +17,8 @@ const DialogContainer: React.FC<React.HTMLProps<HTMLDivElement>> = ({
 }) => <div {...props} className="dialog-container" />;
 
 type DialogProps = {
+  confirmButtonLabel?: string;
+  icon?: React.ReactNode;
   header: string;
   description: string;
   onDeleteClick: () => void;
@@ -25,11 +27,13 @@ type DialogProps = {
 };
 
 const Dialog: React.FC<DialogProps> = ({
+  confirmButtonLabel,
   header,
   description,
   onClose,
   onDeleteClick,
   loading,
+  icon,
 }) => {
   const dialogRef = useRef(null);
   useClickAway(() => {
@@ -41,7 +45,7 @@ const Dialog: React.FC<DialogProps> = ({
   return (
     <DialogWrapper>
       <DialogContainer ref={dialogRef}>
-        <DeleteInfoIcon />
+        {icon ?? <DeleteInfoIcon />}
         <div className="header">{header}</div>
         {description && <div className="description">{description}</div>}
         <div className="actions">
@@ -57,7 +61,7 @@ const Dialog: React.FC<DialogProps> = ({
             onClick={onDeleteClick}
             loading={loading}
           >
-            Delete
+            {confirmButtonLabel ?? "Delete"}
           </Button>
         </div>
       </DialogContainer>
