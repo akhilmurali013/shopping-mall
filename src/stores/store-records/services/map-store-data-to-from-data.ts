@@ -10,7 +10,6 @@ export default (
   ownerName: v.ownerName ?? "",
   phoneNumbers: v.phoneNumbers?.map((phone) => phone.phoneNumber) ?? [],
   emailId: v.primaryEmail ?? "",
-  website: "",
   location: (v?.location?.floorId?.toString() ?? "") as string,
   categories: v.categories ?? [],
   storeSize: v.storeSizeInSqFt,
@@ -31,4 +30,5 @@ export default (
   storeImage: {
     url: v.storeImageUrl,
   },
+  website: v.website,
 });

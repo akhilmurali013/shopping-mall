@@ -32,7 +32,7 @@ export type Store = {
   brandsAvailable: string;
   brandLogoUrl: string;
   storeImageUrl: string;
-
+  website: string;
   storeTimings: StoreTiming;
   links: {
     rel: string;

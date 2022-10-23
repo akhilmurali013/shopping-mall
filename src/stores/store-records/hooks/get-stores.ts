@@ -19,7 +19,7 @@ type StoreListFetchType = {
         name: string;
       };
       categories: StoreCatagories[];
-      brandLogo: string;
+      brandLogoUrl: string;
       storeImage: string;
       storeTimings: {
         openingTime: string;

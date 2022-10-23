@@ -59,7 +59,7 @@ const uploadStoreImages = ({
   const formData = new FormData();
   formData.append("imageCategory", imageCategory);
 
-  formData.append("image", file);
+  formData.append("file", file);
   return axiosInstance.post<{ imageUrl: string }>(
     `/stores/${storeId}/images`,
     formData,
@@ -93,12 +93,13 @@ const useUpdateStore = (storeId?: string) => {
             imageCategory: ImageCategory.BRAND_IMAGE,
             file: v?.brandLogo?.blob,
           });
-          if (v?.storeImage?.blob)
-            await updateImage.mutateAsync({
-              storeId,
-              imageCategory: ImageCategory.STORE_IMAGE,
-              file: v?.storeImage?.blob,
-            });
+        }
+        if (v?.storeImage?.blob) {
+          await updateImage.mutateAsync({
+            storeId,
+            imageCategory: ImageCategory.STORE_IMAGE,
+            file: v?.storeImage?.blob,
+          });
         }
       } finally {
         if (updatedData?.data?.storeId) {

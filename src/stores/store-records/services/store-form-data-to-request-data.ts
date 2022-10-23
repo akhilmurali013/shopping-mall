@@ -16,6 +16,7 @@ export default (data: StoreFormValues): CreateStoreType => ({
   categories: data.categories,
   storeSizeInSqFt: data.storeSize,
   brandsAvailable: data.brandsAvailable,
+  website: data?.website,
   storeTimings: {
     openingTime: data?.timing?.open,
     closingTime: data?.timing?.close,

@@ -31,6 +31,7 @@ export type CreateStoreType = {
     openingTime: string;
     closingTime: string;
   };
+  website: string;
 };
 
 enum ImageCategory {
@@ -56,7 +57,7 @@ const uploadStoreImages = ({
   const formData = new FormData();
   formData.append("imageCategory", imageCategory);
 
-  formData.append("image", file);
+  formData.append("file", file);
   return axiosInstance.post<{ imageUrl: string }>(
     `/stores/${storeId}/images`,
     formData,
