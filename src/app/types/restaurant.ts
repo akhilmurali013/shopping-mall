@@ -82,7 +82,7 @@ export type Restaurant = {
   ownerPhoneNumberPrimary: PhoneNumber;
   ownerPhoneNumberSecondary: PhoneNumber;
   email: string;
-  floor: FloorInfo["floorId"];
+  floor: FloorInfo["id"];
   averageCostPerPerson: number;
   cuisineStyles: CuisineStyle[];
   dishCategories: DishCategory[];

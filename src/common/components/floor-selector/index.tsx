@@ -1,27 +1,34 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { Form } from "antd";
 import { NamePath } from "antd/lib/form/interface";
 
 import Select from "common/components/select";
 
-const floorData = [
-  { value: "0", label: "Ground Floor" },
-  { value: "1", label: "1st Floor" },
-  { value: "2", label: "2nd Floor" },
-  { value: "3", label: "3rd Floor" },
-  { value: "4", label: "4th Floor" },
-];
+import useGetFloorInfo from "./hooks/get-floor-data";
 
 const LocationSelector: React.FC<{
   name: NamePath;
-}> = ({ name }) => (
-  <Form.Item
-    name={name}
-    rules={[{ required: true, message: "Required field" }]}
-  >
-    <Select options={floorData} size="large" style={{ maxWidth: "240px" }} />
-  </Form.Item>
-);
+}> = ({ name }) => {
+  const { data } = useGetFloorInfo();
+
+  const floorData = useMemo(
+    () => data?.data?.map((floor) => ({ value: floor.id, label: floor.name })),
+    [data]
+  );
+
+  return (
+    <Form.Item
+      name={name}
+      rules={[{ required: true, message: "Required field" }]}
+    >
+      <Select
+        options={floorData ?? []}
+        size="large"
+        style={{ maxWidth: "240px" }}
+      />
+    </Form.Item>
+  );
+};
 
 export default LocationSelector;

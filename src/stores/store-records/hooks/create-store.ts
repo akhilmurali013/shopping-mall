@@ -22,7 +22,7 @@ export type CreateStoreType = {
     phoneNumber: number;
   }[];
   location: {
-    floorId: string;
+    floorId: number;
   };
   categories: StoreCatagories[];
   storeSizeInSqFt: number;

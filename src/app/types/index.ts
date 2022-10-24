@@ -1,5 +1,5 @@
 export type FloorInfo = {
-  floorId: number;
+  id: number;
   name: string;
 };
 

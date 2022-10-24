@@ -11,6 +11,6 @@ const getRestaurants = (filters?: RestaurantFilterType) =>
   });
 
 const useGetRestaurants = (filters?: RestaurantFilterType) =>
-  useQuery("get-restaurants", () => getRestaurants(filters));
+  useQuery(["get-restaurants", filters], () => getRestaurants(filters));
 
 export default useGetRestaurants;

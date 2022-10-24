@@ -24,7 +24,7 @@ export type StoreFormValues = {
   phoneNumbers: number[];
   emailId: string;
   website: string;
-  location: string;
+  location: number;
   categories: StoreCatagories[];
   storeSize: number;
   brandsAvailable: string;

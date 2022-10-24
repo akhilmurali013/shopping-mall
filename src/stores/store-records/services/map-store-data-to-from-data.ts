@@ -10,7 +10,7 @@ export default (
   ownerName: v.ownerName ?? "",
   phoneNumbers: v.phoneNumbers?.map((phone) => phone.phoneNumber) ?? [],
   emailId: v.primaryEmail ?? "",
-  location: (v?.location?.floorId?.toString() ?? "") as string,
+  location: v.location.id,
   categories: v.categories ?? [],
   storeSize: v.storeSizeInSqFt,
   brandsAvailable: v.brandsAvailable,
