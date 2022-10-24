@@ -100,3 +100,28 @@ export type Restaurant = {
   restaurantOpen: boolean;
   dishes: Dish[];
 };
+
+
+export type ComboOffer = {
+  comboId: string,
+  comboName: string,
+  comboImageUrl: string,
+  comboDescription: string,
+  price: number,
+  bestSeller: boolean,
+  comboCategories: [
+    {
+      comboCategoryId: string,
+      categoryName: string,
+      isRequired: boolean,
+      items: [
+        {
+          comboItemId: string,
+          restaurantId: string,
+          dishId: string,
+          dishVariantId: string
+        }
+      ]
+    }
+  ]
+};

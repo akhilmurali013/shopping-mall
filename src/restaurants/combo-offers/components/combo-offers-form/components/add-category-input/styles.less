@@ -1,0 +1,55 @@
+@import "app/App.less";
+
+.hide-top-border {
+    border-top: none !important;
+}
+
+.add-category-input-item {
+    width: 240px !important
+}
+
+.category-input-wrapper {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    column-gap: 24px;
+}
+
+.inner-item-wrapper {
+    display: flex;
+    flex-flow: column;
+    column-gap: 24px;
+    @media (min-width: 1050px) {
+        display: grid;
+        grid-template-columns: min-content min-content min-content;
+        grid-template-areas:
+          "restaurant dish ."
+          "variant cost bin";
+    }
+}
+
+.inner-item-restaurant {
+    grid-area: restaurant;
+}
+.inner-item-dish {
+    grid-area: dish;
+}
+.inner-item-variant {
+    grid-area: variant;
+}
+.inner-item-cost {
+    grid-area: cost;
+}
+.inner-item-bin {
+    grid-area: bin;
+    align-self: flex-end;
+    @media (max-width: 1050px) {
+        align-self: flex-start;
+    }
+}
+
+.delete-button {
+   background-color: @error-50 !important;
+   color: @error-700 !important;
+   border: none !important;     
+}

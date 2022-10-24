@@ -83,7 +83,7 @@ const RestaurantForm: React.FC<{
 }) => {
   const { mutateAsync } = useDeleteRestaurantFile();
   const disabled = useMemo(() => variant === "view", [variant]);
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<RestaurantFormValues>();
 
   const deleteFile = (fileCategory: RestaurantFileCategory) => {
     if (restaurantId) {

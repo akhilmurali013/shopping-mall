@@ -10,12 +10,13 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => (
 
 const Item: React.FC<
   React.PropsWithChildren<{
-    label: string;
+    label?: string;
     subLabel?: string;
+    labelClassName?: string
   }>
-> = ({ label, subLabel, children }) => (
+> = ({ label, subLabel, labelClassName, children }) => (
   <div className="table-row">
-    <div className="table-label-cell">
+    <div className={`table-label-cell ${labelClassName ?? ''}`}>
       <div>{label}</div>
       <div className="table-label-cell-description">{subLabel}</div>
     </div>
