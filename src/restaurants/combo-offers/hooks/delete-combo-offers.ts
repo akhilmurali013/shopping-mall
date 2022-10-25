@@ -3,9 +3,9 @@ import { useMutation, useQueryClient } from "react-query";
 import { ComboOffer } from "app/types/restaurant";
 import axiosInstance from "axios-instance";
 
-import { GetCombosQueryId } from './get-combo-offers';
+import { GetCombosQueryId } from "./get-combo-offers";
 
-const removeCombo = (comboId: string ) =>
+const removeCombo = (comboId: string) =>
   axiosInstance.delete<ComboOffer>(`/foodcourt/combos/${comboId}`);
 
 const useDeleteCombo = () => {
@@ -15,6 +15,6 @@ const useDeleteCombo = () => {
       queryClient.refetchQueries(GetCombosQueryId);
     },
   });
-}
+};
 
 export default useDeleteCombo;

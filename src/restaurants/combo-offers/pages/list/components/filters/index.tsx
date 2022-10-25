@@ -1,17 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import { Input } from 'antd';
+import { Input } from "antd";
 
-import Icon from 'common/components/icon';
-import Label from 'common/components/label';
+import Icon from "common/components/icon";
+import Label from "common/components/label";
 
-import { ComboOfferFilterType } from '../../index';
+import { ComboOfferFilterType } from "../../index";
 
 import "./styles.less";
 
 const ComboFilters: React.FC<{
   filters?: ComboOfferFilterType;
-  setFilters: React.Dispatch<React.SetStateAction<ComboOfferFilterType | undefined>>;
+  setFilters: React.Dispatch<
+    React.SetStateAction<ComboOfferFilterType | undefined>
+  >;
 }> = ({ filters, setFilters }) => (
   <div className="combo-offers-filter-form">
     <div className="filter-item">
@@ -26,7 +28,7 @@ const ComboFilters: React.FC<{
         prefix={<Icon name="search" />}
       />
     </div>
-  </div> 
+  </div>
 );
 
 export default ComboFilters;

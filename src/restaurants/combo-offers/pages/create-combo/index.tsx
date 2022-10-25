@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 import { Button } from "antd";
 
 import BreadCrumps from "common/components/bread-crumps";
 import ModuleLayout from "common/components/module-layout";
-import ComboOffersForm from 'restaurants/combo-offers/components/combo-offers-form';
-import { useRouteToComboRoot } from 'restaurants/combo-offers/hooks';
+import ComboOffersForm from "restaurants/combo-offers/components/combo-offers-form";
+import { useRouteToComboRoot } from "restaurants/combo-offers/hooks";
 
 const CreateCombo: React.FC = () => {
   const routeToRoot = useRouteToComboRoot();

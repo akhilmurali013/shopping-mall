@@ -1,22 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Button } from "antd";
 
 import BreadCrumps from "common/components/bread-crumps";
 import Icon from "common/components/icon";
-import Loader from 'common/components/loader';
+import Loader from "common/components/loader";
 import ModuleLayout from "common/components/module-layout";
-import ComboOffersForm from 'restaurants/combo-offers/components/combo-offers-form';
-import ComboDeleteModal from 'restaurants/combo-offers/components/delete-modal';
-import { useDeleteComboOffers, useGetComboOffer, useRouteToComboRoot } from 'restaurants/combo-offers/hooks';
-import routes from 'restaurants/combo-offers/routes';
-
+import ComboOffersForm from "restaurants/combo-offers/components/combo-offers-form";
+import ComboDeleteModal from "restaurants/combo-offers/components/delete-modal";
+import {
+  useDeleteComboOffers,
+  useGetComboOffer,
+  useRouteToComboRoot,
+} from "restaurants/combo-offers/hooks";
+import routes from "restaurants/combo-offers/routes";
 
 const ViewCombo: React.FC = () => {
   const { id } = useParams();
-  const { data , isLoading } = useGetComboOffer(id)
+  const { data, isLoading } = useGetComboOffer(id);
   const navigate = useNavigate();
   const routeToRoot = useRouteToComboRoot();
   const [showDeleteModal, toggleShow] = useState(false);
@@ -48,21 +51,21 @@ const ViewCombo: React.FC = () => {
                 </Button>
               </>
             }
-            formName={combo?.comboName ?? ''}
+            formName={combo?.comboName ?? ""}
             variant="view"
           />
         )}
       </ModuleLayout>
       {showDeleteModal && !!combo && (
         <ComboDeleteModal
-          comboName={combo?.comboName ?? ''}
-          onClose={() =>  toggleShow(false)}
-          onDelete={() => mutateAsync(combo?.comboId).then(
-            () => {
+          comboName={combo?.comboName ?? ""}
+          onClose={() => toggleShow(false)}
+          onDelete={() =>
+            mutateAsync(combo?.comboId).then(() => {
               toggleShow(false);
               routeToRoot();
-            }
-          )}
+            })
+          }
           loading={isDeleting}
         />
       )}

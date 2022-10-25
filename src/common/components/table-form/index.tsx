@@ -12,11 +12,11 @@ const Item: React.FC<
   React.PropsWithChildren<{
     label?: string;
     subLabel?: string;
-    labelClassName?: string
+    labelClassName?: string;
   }>
 > = ({ label, subLabel, labelClassName, children }) => (
   <div className="table-row">
-    <div className={`table-label-cell ${labelClassName ?? ''}`}>
+    <div className={`table-label-cell ${labelClassName ?? ""}`}>
       <div>{label}</div>
       <div className="table-label-cell-description">{subLabel}</div>
     </div>

@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 import { Route, Routes } from "react-router-dom";
 
-import AddComoOffer from './pages/create-combo';
-import EditComoOffer from './pages/edit-combo';
-import ComboOffersList from './pages/list';
+import AddComoOffer from "./pages/create-combo";
+import EditComoOffer from "./pages/edit-combo";
+import ComboOffersList from "./pages/list";
 import ViewCombo from "./pages/view-combo";
 import routes from "./routes";
 
@@ -21,4 +21,3 @@ const ComboOffersScreen: React.FC = () => (
 );
 
 export default ComboOffersScreen;
-

@@ -1,6 +1,6 @@
 import { ModuleConfig } from "app/models/module-config";
 
-import comboOffersRoutes from './combo-offers/routes';
+import comboOffersRoutes from "./combo-offers/routes";
 import restaurantRoutes from "./restaurant-records/routes";
 
 export const root = "restaurant";
@@ -21,7 +21,7 @@ const config: ModuleConfig = {
         route: `${root}/${comboOffersRoutes.root}`,
         defaultName: "Combo Offers",
         folderPath: "restaurants/combo-offers",
-      }
+      },
     ],
   },
 };
