@@ -1,22 +1,17 @@
-import React from "react";
+import { PromotedSectionType } from "common/components/promoted-content/promoted-content-filter";
+import { root } from "stores/config";
+import routes from "stores/promoted-contents/routes";
 
-import PopularStoresForm from "./pages/details-form/components/popular-stores-form";
-import RecentlyLaunchedStoresForm from "./pages/details-form/components/recently-launched-stores-form";
-import TodaysDealsForm from "./pages/details-form/components/todays-deals-form";
-import TryItOutForm from "./pages/details-form/components/try-it-out-form";
-import PopularStores from "./pages/list/components/sections/popular-stores";
-import RecentlyLaunchedStores from "./pages/list/components/sections/recent-stores";
-import TodaysDeals from "./pages/list/components/sections/todays-deals";
-import TryItOut from "./pages/list/components/sections/try-it-out";
+import PopularStoresForm from "./pages/details-forms/popular-stores-form";
+import RecentlyLaunchedStoresForm from "./pages/details-forms/recently-launched-stores-form";
+import TodaysDealsForm from "./pages/details-forms/todays-deals-form";
+import TryItOutForm from "./pages/details-forms/try-it-out-form";
+import PopularStores from "./pages/sections/popular-stores";
+import RecentlyLaunchedStores from "./pages/sections/recent-stores";
+import TodaysDeals from "./pages/sections/todays-deals";
+import TryItOut from "./pages/sections/try-it-out";
 
-type PromotedSectionType = {
-  id: string;
-  header: string;
-  description: string;
-  Component: React.FC;
-  noOfItems: number;
-  Form: React.FC;
-};
+const redirectUrl = `/a/${root}/${routes.root}`;
 
 export const TryItOutSection: PromotedSectionType = {
   id: "try-it-out",
@@ -25,6 +20,7 @@ export const TryItOutSection: PromotedSectionType = {
   Component: TryItOut,
   noOfItems: 5,
   Form: TryItOutForm,
+  redirectUrl,
 };
 
 export const TodaysDealsSection: PromotedSectionType = {
@@ -34,6 +30,7 @@ export const TodaysDealsSection: PromotedSectionType = {
   Component: TodaysDeals,
   noOfItems: 10,
   Form: TodaysDealsForm,
+  redirectUrl,
 };
 
 export const PopularStoresSection: PromotedSectionType = {
@@ -44,6 +41,7 @@ export const PopularStoresSection: PromotedSectionType = {
   Component: PopularStores,
   noOfItems: 10,
   Form: PopularStoresForm,
+  redirectUrl,
 };
 
 export const RecentlyLaunchedSection: PromotedSectionType = {
@@ -53,6 +51,7 @@ export const RecentlyLaunchedSection: PromotedSectionType = {
   Component: RecentlyLaunchedStores,
   noOfItems: 10,
   Form: RecentlyLaunchedStoresForm,
+  redirectUrl,
 };
 
 const promotedSectionsList: PromotedSectionType[] = [

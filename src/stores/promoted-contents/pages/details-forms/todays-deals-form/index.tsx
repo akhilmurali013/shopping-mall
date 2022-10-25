@@ -3,16 +3,19 @@ import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import DetailsForm from "common/components/promoted-content/details-form";
-import { root } from "stores/config";
+import { PromotedSectionType } from "common/components/promoted-content/promoted-content-filter";
 import {
   useGetOffersIdNameMap,
   useGetPromotedOffers,
   useUpdatePromotedOffers,
 } from "stores/promoted-contents/hooks";
-import { TodaysDealsSection } from "stores/promoted-contents/promoted-content-sections";
-import routes from "stores/promoted-contents/routes";
 
-const TodaysDealsForm: React.FC = () => {
+const TodaysDealsForm: React.FC<{
+  header: PromotedSectionType["header"];
+  description: PromotedSectionType["description"];
+  noOfItems: PromotedSectionType["noOfItems"];
+  redirectUrl: PromotedSectionType["redirectUrl"];
+}> = ({ header, description, noOfItems, redirectUrl }) => {
   const navigate = useNavigate();
   const offerIdNameMap = useGetOffersIdNameMap();
   const promotedOffers = useGetPromotedOffers();
@@ -24,14 +27,14 @@ const TodaysDealsForm: React.FC = () => {
   );
   return (
     <DetailsForm
-      header={TodaysDealsSection?.header}
-      description={TodaysDealsSection?.description}
-      formItemNos={TodaysDealsSection?.noOfItems}
+      header={header}
+      description={description}
+      formItemNos={noOfItems}
       selectOptions={offerIdNameMap ?? []}
       values={offersList}
       onSubmit={(values) => {
         mutateAsync(values?.map((v) => ({ id: v }))).then(() =>
-          navigate(`/a/${root}/${routes.root}`)
+          navigate(redirectUrl)
         );
       }}
       onCancelClick={() => navigate(-1)}

@@ -138,13 +138,13 @@ const EventForm: React.FC<{
             label="Event Poster"
             subLabel="This image will come in Event cards"
           >
-            <FormItemImageUpload name="poster" />
+            <FormItemImageUpload name="poster" disabled={disabled} />
           </TableForm.Item>
           <TableForm.Item
             label="Event Banner"
             subLabel="This image will come in Event detail page"
           >
-            <FormItemImageUpload name="banner" />
+            <FormItemImageUpload name="banner" disabled={disabled} />
           </TableForm.Item>
         </TableForm.Layout>
       </Form>

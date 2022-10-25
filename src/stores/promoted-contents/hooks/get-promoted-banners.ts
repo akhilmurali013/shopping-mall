@@ -6,7 +6,7 @@ export const GetPromotedBannersQueryId = "get-promoted-banners";
 
 export type PromotedBanners = {
   id: string;
-  name: string;
+  title: string;
   ownerDetails: {
     ownerId: string;
     ownerType: string;

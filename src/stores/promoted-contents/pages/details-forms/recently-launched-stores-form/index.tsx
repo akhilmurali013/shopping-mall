@@ -3,16 +3,19 @@ import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import DetailsForm from "common/components/promoted-content/details-form";
-import { root } from "stores/config";
+import { PromotedSectionType } from "common/components/promoted-content/promoted-content-filter";
 import {
   useGetRecentlyLaunchedStores,
   useGetStoresIdNameMap,
   useUpdateRecentlyLaunchedStores,
 } from "stores/promoted-contents/hooks";
-import { RecentlyLaunchedSection } from "stores/promoted-contents/promoted-content-sections";
-import routes from "stores/promoted-contents/routes";
 
-const RecentlyLaunchedStoresForm: React.FC = () => {
+const RecentlyLaunchedStoresForm: React.FC<{
+  header: PromotedSectionType["header"];
+  description: PromotedSectionType["description"];
+  noOfItems: PromotedSectionType["noOfItems"];
+  redirectUrl: PromotedSectionType["redirectUrl"];
+}> = ({ header, description, noOfItems, redirectUrl }) => {
   const navigate = useNavigate();
   const storeNameIdMap = useGetStoresIdNameMap();
   const recentStores = useGetRecentlyLaunchedStores();
@@ -24,14 +27,14 @@ const RecentlyLaunchedStoresForm: React.FC = () => {
   );
   return (
     <DetailsForm
-      header={RecentlyLaunchedSection?.header}
-      description={RecentlyLaunchedSection?.description}
-      formItemNos={RecentlyLaunchedSection?.noOfItems}
+      header={header}
+      description={description}
+      formItemNos={noOfItems}
       selectOptions={storeNameIdMap ?? []}
       values={storeList}
       onSubmit={(values) => {
         mutateAsync(values?.map((v) => ({ id: v }))).then(() =>
-          navigate(`/a/${root}/${routes.root}`)
+          navigate(redirectUrl)
         );
       }}
       onCancelClick={() => navigate(-1)}

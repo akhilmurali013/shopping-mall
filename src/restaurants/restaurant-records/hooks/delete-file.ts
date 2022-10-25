@@ -7,9 +7,9 @@ const deleteFile = (
   restaurantId: string,
   fileCategory: RestaurantFileCategory
 ) =>
-  axiosInstance.delete(`/restaurants/${restaurantId}/files`, {
-    data: { fileCategory },
-  });
+  axiosInstance.delete(
+    `/restaurants/${restaurantId}/files?fileCategory=${fileCategory}`
+  );
 
 const useDeleteFile = () =>
   useMutation(

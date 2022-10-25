@@ -3,15 +3,14 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import { NamePath } from "antd/lib/form/interface";
 
-// import Icon from 'common/components/icon';
-
 import "./styles.less";
 import Icon from "common/components/icon";
 
 const PhoneNumberInput: React.FC<{
   name: NamePath;
   maximumAllowed?: number;
-}> = ({ name, maximumAllowed }) => (
+  disabled: boolean;
+}> = ({ name, maximumAllowed, disabled }) => (
   <Form.List
     name={name}
     rules={[
@@ -44,12 +43,14 @@ const PhoneNumberInput: React.FC<{
               >
                 <Input placeholder="Enter phone number" size="large" />
               </Form.Item>
-              {index !== 0 && <Icon name="bin" onClick={() => remove(index)} />}
+              {index !== 0 && !disabled && (
+                <Icon name="bin" onClick={() => remove(index)} />
+              )}
             </div>
           </Form.Item>
         ))}
         {(!maximumAllowed || fields?.length < maximumAllowed) && (
-          <Form.Item noStyle>
+          <Form.Item>
             <Button onClick={() => add()} size="large">
               Add another number
             </Button>

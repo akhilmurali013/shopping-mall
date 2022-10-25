@@ -67,7 +67,7 @@ const ListOfRestaurants: React.FC = () => {
       data?.data?.restaurants?.map((restaurant) => ({
         storeName: <div>{restaurant.restaurantName}</div>,
         ownerName: restaurant.ownerName,
-        location: restaurant.floor,
+        location: restaurant.floor.name,
         category: (
           <div className="table-category-cell">
             {restaurant?.cuisineStyles?.map((cuisineStyle) => (
@@ -77,7 +77,13 @@ const ListOfRestaurants: React.FC = () => {
         ),
         actions: (
           <div className="table-actions-cell">
-            <button type="button" className="action-button">
+            <button
+              type="button"
+              className="action-button"
+              onClick={() =>
+                navigate(`${routes.details}/${restaurant.restaurantId}`)
+              }
+            >
               <Icon name="view" />
             </button>
             <button
@@ -87,7 +93,15 @@ const ListOfRestaurants: React.FC = () => {
             >
               <Icon name="bin" />
             </button>
-            <button type="button" className="action-button">
+            <button
+              type="button"
+              className="action-button"
+              onClick={() =>
+                navigate(
+                  `${routes.details}/${restaurant.restaurantId}/${routes?.edit}`
+                )
+              }
+            >
               <Icon name="pencil" />
             </button>
           </div>

@@ -44,7 +44,7 @@ const ViewRestaurantDetails: React.FC = () => {
       <ModuleLayout>
         <BreadCrumps pathItems={["Restaurant Records", "Details"]} />
         {isLoading && <Loader />}
-        {!isLoading && (
+        {!!data?.data && (
           <RestaurantForm
             submitButtonText="Create"
             cancelButton={

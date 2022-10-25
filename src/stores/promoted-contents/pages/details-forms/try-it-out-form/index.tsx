@@ -3,16 +3,19 @@ import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import DetailsForm from "common/components/promoted-content/details-form";
-import { root } from "stores/config";
+import { PromotedSectionType } from "common/components/promoted-content/promoted-content-filter";
 import {
   useGetBannersIdNameMap,
   useGetPromotedBanners,
   useUpdatePromotedBanners,
 } from "stores/promoted-contents/hooks";
-import { TryItOutSection } from "stores/promoted-contents/promoted-content-sections";
-import routes from "stores/promoted-contents/routes";
 
-const TryItOutForm: React.FC = () => {
+const TryItOutForm: React.FC<{
+  header: PromotedSectionType["header"];
+  description: PromotedSectionType["description"];
+  noOfItems: PromotedSectionType["noOfItems"];
+  redirectUrl: PromotedSectionType["redirectUrl"];
+}> = ({ header, description, noOfItems, redirectUrl }) => {
   const navigate = useNavigate();
   const bannerIdNameMap = useGetBannersIdNameMap();
   const promotedBanners = useGetPromotedBanners();
@@ -24,14 +27,14 @@ const TryItOutForm: React.FC = () => {
   );
   return (
     <DetailsForm
-      header={TryItOutSection?.header}
-      description={TryItOutSection?.description}
-      formItemNos={TryItOutSection?.noOfItems}
+      header={header}
+      description={description}
+      formItemNos={noOfItems}
       selectOptions={bannerIdNameMap ?? []}
       values={bannerList}
       onSubmit={(values) => {
         mutateAsync(values?.map((v) => ({ id: v }))).then(() =>
-          navigate(`/a/${root}/${routes.root}`)
+          navigate(redirectUrl)
         );
       }}
       onCancelClick={() => navigate(-1)}

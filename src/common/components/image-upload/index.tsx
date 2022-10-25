@@ -27,19 +27,22 @@ const ImageViewer: React.FC<{
   url?: string;
   clearImage: () => void;
   deleteImage?: () => void;
-}> = ({ url, clearImage, deleteImage }) => (
+  disabled: boolean;
+}> = ({ url, clearImage, deleteImage, disabled }) => (
   <div className="image-preview-wrapper">
     <Image className="image-preview" src={url} />
-    <div>
-      {deleteImage && (
-        <Button onClick={deleteImage} type="text">
-          Delete
+    {!disabled && (
+      <div>
+        {deleteImage && (
+          <Button onClick={deleteImage} type="text">
+            Delete
+          </Button>
+        )}
+        <Button onClick={clearImage} type="link">
+          Update
         </Button>
-      )}
-      <Button onClick={clearImage} type="link">
-        Update
-      </Button>
-    </div>
+      </div>
+    )}
   </div>
 );
 
@@ -49,13 +52,22 @@ const ImageUpload: React.FC<{
   onChange: UploadProps["onChange"];
   clearImage: () => void;
   deleteImage?: () => void;
-}> = ({ defaultImageUrl, imageBlobUrl, onChange, clearImage, deleteImage }) => {
+  disabled: boolean;
+}> = ({
+  defaultImageUrl,
+  imageBlobUrl,
+  onChange,
+  clearImage,
+  deleteImage,
+  disabled,
+}) => {
   if (defaultImageUrl || imageBlobUrl) {
     return (
       <ImageViewer
         url={defaultImageUrl || imageBlobUrl}
         clearImage={clearImage}
         deleteImage={deleteImage}
+        disabled={disabled}
       />
     );
   }

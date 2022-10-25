@@ -13,7 +13,7 @@ export default (v: Restaurant): RestaurantFormValues => ({
     v?.ownerPhoneNumberSecondary?.phoneNumber,
   ].filter((i) => !!i),
   emailId: v.email,
-  location: `${v.floor}`,
+  location: v.floor.id ?? "",
   cuisineStyles: v.cuisineStyles,
   dishCategories: v.dishCategories,
   brandLogo: {

@@ -4,6 +4,8 @@ import { Restaurant } from "app/types/restaurant";
 import axiosInstance from "axios-instance";
 import { RestaurantFilterType } from "restaurants/restaurant-records/pages/list-of-restaurants";
 
+export const GetRestaurantsQueryId = "get-restaurants";
+
 const getRestaurants = (filters?: RestaurantFilterType) =>
   axiosInstance.post<{ restaurants: Restaurant[] }>("/restaurants/_query", {
     restaurantName: filters?.query ?? "",
@@ -11,6 +13,6 @@ const getRestaurants = (filters?: RestaurantFilterType) =>
   });
 
 const useGetRestaurants = (filters?: RestaurantFilterType) =>
-  useQuery(["get-restaurants", filters], () => getRestaurants(filters));
+  useQuery([GetRestaurantsQueryId, filters], () => getRestaurants(filters));
 
 export default useGetRestaurants;

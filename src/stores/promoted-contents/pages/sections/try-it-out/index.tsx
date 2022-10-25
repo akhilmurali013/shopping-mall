@@ -14,7 +14,7 @@ const TryItOut: React.FC = () => {
         ?.slice(0, TryItOutSection?.noOfItems)
         .map((item, index) => ({
           position: index + 1,
-          value: item?.name,
+          value: item?.title,
           id: item?.id,
         })),
     [data]

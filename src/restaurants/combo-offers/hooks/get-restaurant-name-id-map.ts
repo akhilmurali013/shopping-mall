@@ -6,10 +6,11 @@ const useGetRestaurantNameIdMap = () => {
   const { data } = useGetRestaurants();
 
   const restaurantNameIdMap = useMemo(
-    () => data?.data?.restaurants?.map((restaurant) => ({
-      label: restaurant?.restaurantId,
-      value: restaurant?.restaurantName
-    })),
+    () =>
+      data?.data?.restaurants?.map((restaurant) => ({
+        value: restaurant?.restaurantId,
+        label: restaurant?.restaurantName,
+      })),
     [data]
   );
 

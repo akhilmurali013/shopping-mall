@@ -82,7 +82,7 @@ export type Restaurant = {
   ownerPhoneNumberPrimary: PhoneNumber;
   ownerPhoneNumberSecondary: PhoneNumber;
   email: string;
-  floor: FloorInfo["id"];
+  floor: FloorInfo;
   averageCostPerPerson: number;
   cuisineStyles: CuisineStyle[];
   dishCategories: DishCategory[];
@@ -101,27 +101,26 @@ export type Restaurant = {
   dishes: Dish[];
 };
 
-
 export type ComboOffer = {
-  comboId: string,
-  comboName: string,
-  comboImageUrl: string,
-  comboDescription: string,
-  price: number,
-  bestSeller: boolean,
+  comboId: string;
+  comboName: string;
+  comboImageUrl: string;
+  comboDescription: string;
+  price: number;
+  bestSeller: boolean;
   comboCategories: [
     {
-      comboCategoryId: string,
-      categoryName: string,
-      isRequired: boolean,
+      comboCategoryId: string;
+      categoryName: string;
+      isRequired: boolean;
       items: [
         {
-          comboItemId: string,
-          restaurantId: string,
-          dishId: string,
-          dishVariantId: string
+          comboItemId: string;
+          restaurantId: string;
+          dishId: string;
+          dishVariantId: string;
         }
-      ]
+      ];
     }
-  ]
+  ];
 };

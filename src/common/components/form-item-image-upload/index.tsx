@@ -8,7 +8,8 @@ const FormItemImageUpload: React.FC<{
   name: string;
   required?: boolean;
   deleteImage?: () => void;
-}> = ({ name, required = true, deleteImage }) => (
+  disabled: boolean;
+}> = ({ name, required = true, deleteImage, disabled }) => (
   <Form.Item
     name={name}
     rules={[
@@ -37,6 +38,7 @@ const FormItemImageUpload: React.FC<{
     >
       {({ getFieldValue, setFieldValue, validateFields }) => (
         <ImageUpload
+          disabled={disabled}
           defaultImageUrl={getFieldValue([name, "url"]) ?? ""}
           imageBlobUrl={
             getFieldValue([name, "blob"])
@@ -51,7 +53,11 @@ const FormItemImageUpload: React.FC<{
             setFieldValue(name, {});
             validateFields([name]);
           }}
-          deleteImage={getFieldValue([name, "url"]) ? deleteImage : undefined}
+          deleteImage={
+            getFieldValue([name, "url"]) && deleteImage
+              ? deleteImage
+              : undefined
+          }
         />
       )}
     </Form.Item>

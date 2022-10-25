@@ -26,7 +26,7 @@ export type RestaurantFormValues = {
   restaurantPhoneNumber: number[];
   ownerPhoneNumber: number[];
   emailId: string;
-  location: string;
+  location: number;
   cuisineStyles: CuisineStyle[];
   dishCategories: DishCategory[];
   brandLogo: {
@@ -173,17 +173,18 @@ const RestaurantForm: React.FC<{
             </Form.Item>
           </TableForm.Item>
           <TableForm.Item label="Restaurant Phone number">
-            <Form.Item name="restaurantPhoneNumber">
-              <PhoneNumberInput
-                name="restaurantPhoneNumber"
-                maximumAllowed={2}
-              />
-            </Form.Item>
+            <PhoneNumberInput
+              name="restaurantPhoneNumber"
+              maximumAllowed={2}
+              disabled={disabled}
+            />
           </TableForm.Item>
           <TableForm.Item label="Owner Phone number">
-            <Form.Item name="ownerPhoneNumber">
-              <PhoneNumberInput name="ownerPhoneNumber" maximumAllowed={2} />
-            </Form.Item>
+            <PhoneNumberInput
+              name="ownerPhoneNumber"
+              maximumAllowed={2}
+              disabled={disabled}
+            />
           </TableForm.Item>
           <TableForm.Item label="Email Id">
             <Form.Item
@@ -208,9 +209,10 @@ const RestaurantForm: React.FC<{
           <TableForm.Item label="Brand Logo" subLabel="State with image">
             <FormItemImageUpload
               name="brandLogo"
-              deleteImage={() =>
-                deleteFile(RestaurantFileCategory.RESTAURANT_LOGO)
-              }
+              deleteImage={() => {
+                deleteFile(RestaurantFileCategory.RESTAURANT_LOGO);
+              }}
+              disabled={disabled}
             />
           </TableForm.Item>
           <TableForm.Item label="Store timing">
@@ -233,6 +235,7 @@ const RestaurantForm: React.FC<{
               deleteImage={() =>
                 deleteFile(RestaurantFileCategory.RESAURANT_MENU_IMAGE)
               }
+              disabled={disabled}
             />
           </TableForm.Item>
           <TableForm.Item label="Upload PAN details">
@@ -241,6 +244,7 @@ const RestaurantForm: React.FC<{
               deleteImage={() =>
                 deleteFile(RestaurantFileCategory.RESTAURANT_PAN)
               }
+              disabled={disabled}
             />
           </TableForm.Item>
           <TableForm.Item label="Upload GST certificate">
@@ -248,6 +252,9 @@ const RestaurantForm: React.FC<{
               name="gstCertificate"
               defaultFileName="GST Certificate"
               isEditable={!disabled}
+              deleteFile={() =>
+                deleteFile(RestaurantFileCategory.RESTAURANT_GST_CERTIFICATE)
+              }
             />
           </TableForm.Item>
           <TableForm.Item label="Upload FSSAI certificate">
@@ -255,6 +262,9 @@ const RestaurantForm: React.FC<{
               name="fssaiCertificate"
               defaultFileName="FSSAI Certificate"
               isEditable={!disabled}
+              deleteFile={() =>
+                deleteFile(RestaurantFileCategory.RESTAURANT_FSSAI_CERTIFICATE)
+              }
             />
           </TableForm.Item>
         </TableForm.Layout>

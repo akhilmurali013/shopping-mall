@@ -122,9 +122,11 @@ const StoreForm: React.FC<{
             </Form.Item>
           </TableForm.Item>
           <TableForm.Item label="Phone number">
-            <Form.Item name="phoneNumbers">
-              <PhoneNumberInput name="phoneNumbers" />
-            </Form.Item>
+            <PhoneNumberInput
+              name="phoneNumbers"
+              disabled={disabled}
+              maximumAllowed={2}
+            />
           </TableForm.Item>
           <TableForm.Item label="Email Id">
             <Form.Item
@@ -178,13 +180,13 @@ const StoreForm: React.FC<{
             label="Brand Logo"
             subLabel="This image will come in store cards and detail page"
           >
-            <FormItemImageUpload name="brandLogo" />
+            <FormItemImageUpload name="brandLogo" disabled={disabled} />
           </TableForm.Item>
           <TableForm.Item
             label="Store Image"
             subLabel="This image will come in store cards"
           >
-            <FormItemImageUpload name="storeImage" />
+            <FormItemImageUpload name="storeImage" disabled={disabled} />
           </TableForm.Item>
           <TableForm.Item label="Store timing">
             <TimeRangeSelect

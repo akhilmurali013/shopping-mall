@@ -29,19 +29,22 @@ const ViewRestaurantDetails: React.FC = () => {
     <ModuleLayout>
       <BreadCrumps pathItems={["Restaurant Records", "edit"]} />
       {isLoading && <Loader />}
-      <RestaurantForm
-        submitButtonText="Save Details"
-        cancelButton={
-          <Button size="large" onClick={() => navigate(-1)} htmlType="button">
-            Cancel
-          </Button>
-        }
-        formName={data?.data?.restaurantName ?? ""}
-        onSubmit={update}
-        loading={updating}
-        defaultValues={formData}
-        variant="update-form"
-      />
+      {!!data?.data && (
+        <RestaurantForm
+          submitButtonText="Save Details"
+          cancelButton={
+            <Button size="large" onClick={() => navigate(-1)} htmlType="button">
+              Cancel
+            </Button>
+          }
+          restaurantId={data?.data?.restaurantId}
+          formName={data?.data?.restaurantName ?? ""}
+          onSubmit={update}
+          loading={updating}
+          defaultValues={formData}
+          variant="update-form"
+        />
+      )}
     </ModuleLayout>
   );
 };
