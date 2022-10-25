@@ -10,7 +10,7 @@ export type ComboRequestType = {
   comboImageUrl: string;
   comboDescription: string;
   price: number;
-  // bestSeller: boolean;
+  bestSeller: boolean;
   comboCategories: {
     comboCategoryName: string;
     items: {

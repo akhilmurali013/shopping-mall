@@ -128,6 +128,7 @@ const ComboOffersForm: React.FC<{
                 size="large"
                 prefix="₹"
                 className="amount-input-field"
+                disabled
               />
             </Form.Item>
           </TableForm.Item>

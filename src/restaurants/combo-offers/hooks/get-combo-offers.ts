@@ -6,7 +6,7 @@ import axiosInstance from "axios-instance";
 export const GetCombosQueryId = "get-combo-offers";
 
 const getComboOffers = () =>
-  axiosInstance.get<{ combos: ComboOffer[] }>("/foodcourt/combos");
+  axiosInstance.post<{ combos: ComboOffer[] }>("/foodcourt/combos/_query", {});
 
 const useGetComboOffers = () =>
   useQuery([GetCombosQueryId], () => getComboOffers());

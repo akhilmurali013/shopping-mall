@@ -6,7 +6,7 @@ export default (v: ComboOffersFormValue): ComboRequestType => ({
   comboImageUrl: v.comboImage?.url ?? "",
   comboDescription: v.description,
   price: 100,
-  // bestSeller: boolean;
+  bestSeller: false,
   comboCategories: v.comboCategories?.map((combo) => ({
     comboCategoryName: combo?.comboCategoryName ?? "",
     items: combo?.items?.map((item) => ({

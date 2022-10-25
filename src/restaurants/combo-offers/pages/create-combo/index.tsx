@@ -5,10 +5,14 @@ import { Button } from "antd";
 import BreadCrumps from "common/components/bread-crumps";
 import ModuleLayout from "common/components/module-layout";
 import ComboOffersForm from "restaurants/combo-offers/components/combo-offers-form";
-import { useRouteToComboRoot } from "restaurants/combo-offers/hooks";
+import {
+  useCreateComboOffer,
+  useRouteToComboRoot,
+} from "restaurants/combo-offers/hooks";
 
 const CreateCombo: React.FC = () => {
   const routeToRoot = useRouteToComboRoot();
+  const { create, isLoading } = useCreateComboOffer();
   return (
     <ModuleLayout>
       <BreadCrumps pathItems={["Combo offers", "edit"]} />
@@ -20,9 +24,9 @@ const CreateCombo: React.FC = () => {
           </Button>
         }
         formName="Add New Combo"
-        // onSubmit={create}
+        onSubmit={create}
         variant="create-form"
-        // loading={isLoading}
+        loading={isLoading}
       />
     </ModuleLayout>
   );

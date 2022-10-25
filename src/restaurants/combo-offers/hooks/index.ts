@@ -4,3 +4,4 @@ export { default as useRouteToComboRoot } from "./route-to-combo-list";
 export { default as useGetRestaurantNameIdMap } from "./get-restaurant-name-id-map";
 export { default as useGetComboOffer } from "./get-combo-offer";
 export { default as useGetRestaurantDishes } from "./get-restaurant-dishes";
+export { default as useCreateComboOffer } from "./create-combo";
