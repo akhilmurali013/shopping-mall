@@ -1,13 +1,18 @@
 import { useMutation } from "react-query";
 
+import { AxiosResponse } from "axios";
+
 import { ComboOffer } from "app/types/restaurant";
 import axiosInstance from "axios-instance";
 import { ComboOffersFormValue } from "restaurants/combo-offers/components/combo-offers-form";
+import {
+  useRouteToComboRoot,
+  useUploadComboFile,
+} from "restaurants/combo-offers/hooks";
 import mapComboFormValuesToRequestData from "restaurants/combo-offers/services/map-combo-form-values-to-request-data";
 
-export type ComboRequestType = {
+export type ComboCreateRequestType = {
   comboName: string;
-  comboImageUrl: string;
   comboDescription: string;
   price: number;
   bestSeller: boolean;
@@ -21,17 +26,37 @@ export type ComboRequestType = {
   }[];
 };
 
-const createComboOffer = (data: ComboRequestType) =>
+const createComboOffer = (data: ComboCreateRequestType) =>
   axiosInstance.post<ComboOffer>(`/foodcourt/combos`, { ...data });
 
 const useCreateComboOffer = () => {
-  const { mutate, isLoading } = useMutation(createComboOffer);
+  const routeToRestaurantRoot = useRouteToComboRoot();
+  const { mutateAsync: uploadFile, isLoading: uploadingImage } =
+    useUploadComboFile();
+  const { mutateAsync, isLoading } = useMutation(createComboOffer);
 
-  const create = (v: ComboOffersFormValue) => {
-    mutate(mapComboFormValuesToRequestData(v));
+  const create = async (v: ComboOffersFormValue) => {
+    let data: AxiosResponse<ComboOffer> | undefined;
+    try {
+      data = await mutateAsync(mapComboFormValuesToRequestData(v));
+      if (data?.data?.comboId) {
+        if (v?.comboImage?.blob) {
+          await uploadFile({
+            comboId: data?.data?.comboId,
+            file: v.comboImage?.blob,
+          });
+        }
+      }
+    } catch {
+      //
+    } finally {
+      if (data?.data?.comboId) {
+        routeToRestaurantRoot();
+      }
+    }
   };
 
-  return { create, isLoading };
+  return { create, isLoading: isLoading || uploadingImage };
 };
 
 export default useCreateComboOffer;

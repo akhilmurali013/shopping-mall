@@ -17,7 +17,9 @@ export default (v: RestaurantFormValues): RestaurantCreateType => ({
     ? { countryCode: "+91", phoneNumber: v.ownerPhoneNumber?.[1] }
     : undefined,
   email: v.emailId,
-  floor: v.location,
+  floor: {
+    id: v.location,
+  },
   cuisineStyles: v.cuisineStyles,
   dishCategories: v.dishCategories,
   openingTime: v.timing.open,

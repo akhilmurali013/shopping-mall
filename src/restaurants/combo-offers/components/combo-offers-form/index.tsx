@@ -5,6 +5,7 @@ import { Button, Form, Input } from "antd";
 import FormItemImageUpload from "common/components/form-item-image-upload";
 import ModuleLayout from "common/components/module-layout";
 import TableForm from "common/components/table-form";
+import { useDeleteComboImage } from "restaurants/combo-offers/hooks";
 
 import AddCategory from "./components/add-category-input";
 
@@ -32,6 +33,7 @@ export type ComboOffersFormValue = {
 const { TextArea } = Input;
 
 const ComboOffersForm: React.FC<{
+  comboId?: string;
   submitButtonText?: string;
   cancelButton?: React.ReactNode;
   formName: string;
@@ -40,6 +42,7 @@ const ComboOffersForm: React.FC<{
   variant: "create-form" | "update-form" | "view";
   loading?: boolean;
 }> = ({
+  comboId,
   submitButtonText,
   cancelButton,
   formName,
@@ -50,6 +53,14 @@ const ComboOffersForm: React.FC<{
 }) => {
   const disabled = useMemo(() => variant === "view", [variant]);
   const [form] = Form.useForm<ComboOffersFormValue>();
+  const { mutateAsync: deleteFile } = useDeleteComboImage();
+
+  const deleteComboFile = () => {
+    if (comboId)
+      deleteFile(comboId).then(() => {
+        form.setFieldValue(["comboImage"], undefined);
+      });
+  };
 
   useEffect(() => {
     form.setFieldsValue({
@@ -81,6 +92,7 @@ const ComboOffersForm: React.FC<{
         (acc, item) => acc + (item?.price ?? 0),
         0
       );
+      console.log({ sum });
       return price + sum;
     }, 0);
     form.setFieldValue(["cost"], totalPrice);
@@ -137,7 +149,11 @@ const ComboOffersForm: React.FC<{
             label="Combo image"
             subLabel="This image will come in combo cards"
           >
-            <FormItemImageUpload name="comboImage" disabled={disabled} />
+            <FormItemImageUpload
+              name="comboImage"
+              disabled={disabled}
+              deleteImage={deleteComboFile}
+            />
           </TableForm.Item>
           <TableForm.Item label="Combo description">
             <Form.Item name="description">

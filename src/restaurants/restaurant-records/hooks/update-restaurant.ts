@@ -1,35 +1,13 @@
 import { useMutation } from "react-query";
 
-import { PhoneNumber } from "app/types";
-import { CuisineStyle, DishCategory, Restaurant } from "app/types/restaurant";
+import { Restaurant } from "app/types/restaurant";
 import axiosInstance from "axios-instance";
 import { RestaurantFormValues } from "restaurants/restaurant-records/components/restaurant-form";
 import mapRestaurantFormDataToCreateInput from "restaurants/restaurant-records/services/map-restaurant-form-data-to-create-input";
 import RestaurantFileCategory from "restaurants/restaurant-records/services/restaurent-file-category";
 
+import { RestaurantCreateType } from "./create-restaurant";
 import useUploadRestaurantFile from "./upload-restaurant-image";
-
-export type RestaurantCreateType = {
-  restaurantName: string;
-  ownerName: string;
-  restaurantPhoneNumberPrimary?: PhoneNumber;
-  restaurantPhoneNumberSecondary?: PhoneNumber;
-  ownerPhoneNumberPrimary?: PhoneNumber;
-  ownerPhoneNumberSecondary?: PhoneNumber;
-  email: string;
-  floor: number;
-  cuisineStyles: CuisineStyle[];
-  dishCategories: DishCategory[];
-  openingTime: string;
-  closingTime: string;
-  bankAccount: {
-    accountName: string;
-    accountNumber: string;
-    bankName: string;
-    ifscCode: string;
-    upiId: string;
-  };
-};
 
 const updateRestaurant = ({
   id,
@@ -37,7 +15,11 @@ const updateRestaurant = ({
 }: {
   id: string;
   value: RestaurantCreateType;
-}) => axiosInstance.put<Restaurant>(`/restaurants/${id}`, { ...value });
+}) =>
+  axiosInstance.put<Restaurant>(`/restaurants/${id}`, {
+    restaurantId: id,
+    ...value,
+  });
 
 const useCreateRestaurant = (id: string) => {
   const { mutateAsync: uploadFile, isLoading: imageUploading } =

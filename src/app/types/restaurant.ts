@@ -111,7 +111,7 @@ export type ComboOffer = {
   comboCategories: [
     {
       comboCategoryId: string;
-      categoryName: string;
+      comboCategoryName: string;
       isRequired: boolean;
       items: [
         {

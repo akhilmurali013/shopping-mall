@@ -1,11 +1,10 @@
-import { ComboOffersFormValue } from "../components/combo-offers-form";
-import { ComboRequestType } from "../hooks/create-combo";
+import { ComboOffersFormValue } from "restaurants/combo-offers//components/combo-offers-form";
+import { ComboCreateRequestType } from "restaurants/combo-offers/hooks/create-combo";
 
-export default (v: ComboOffersFormValue): ComboRequestType => ({
+export default (v: ComboOffersFormValue): ComboCreateRequestType => ({
   comboName: v.comboName,
-  comboImageUrl: v.comboImage?.url ?? "",
   comboDescription: v.description,
-  price: 100,
+  price: v.cost,
   bestSeller: false,
   comboCategories: v.comboCategories?.map((combo) => ({
     comboCategoryName: combo?.comboCategoryName ?? "",

@@ -52,6 +52,31 @@ const ItemSubForm: React.FC<{
     form
   );
 
+  const clearFields = {
+    dishId: () =>
+      form.setFieldValue(
+        [
+          "comboCategories",
+          `${categoryIndex}`,
+          "items",
+          `${itemIndex}`,
+          "dishId",
+        ],
+        undefined
+      ),
+    variantId: () =>
+      form.setFieldValue(
+        [
+          "comboCategories",
+          `${categoryIndex}`,
+          "items",
+          `${itemIndex}`,
+          "dishVariantId",
+        ],
+        undefined
+      ),
+  };
+
   const { restaurantDishIdNameMap, dishVariantMap, variantIdMap } =
     useGetRestaurantDishDetails(restaurantId);
 
@@ -68,7 +93,7 @@ const ItemSubForm: React.FC<{
         variantIdMap?.[dishVariantId]?.price
       );
     }
-  }, [dishVariantId]);
+  }, [dishVariantId, variantIdMap]);
 
   return (
     <TableForm.Item
@@ -86,6 +111,10 @@ const ItemSubForm: React.FC<{
               className="add-category-input-item"
               size="large"
               options={restaurantNameIdMap}
+              onChange={() => {
+                clearFields.dishId();
+                clearFields.variantId();
+              }}
             />
           </Form.Item>
         </div>
@@ -99,6 +128,9 @@ const ItemSubForm: React.FC<{
               className="add-category-input-item"
               size="large"
               options={restaurantDishIdNameMap ?? []}
+              onChange={() => {
+                clearFields.variantId();
+              }}
             />
           </Form.Item>
         </div>

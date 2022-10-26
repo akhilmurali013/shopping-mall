@@ -9,6 +9,9 @@ const getComboOffer = (id?: string) =>
   axiosInstance.get<ComboOffer>(`/foodcourt/combos/${id}`);
 
 const useGetComboOffer = (id?: string) =>
-  useQuery([GetComboQueryId, id], () => getComboOffer(id), { enabled: !!id });
+  useQuery([GetComboQueryId, id], () => getComboOffer(id), {
+    enabled: !!id,
+    refetchOnWindowFocus: false,
+  });
 
 export default useGetComboOffer;

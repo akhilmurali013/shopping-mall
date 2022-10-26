@@ -20,7 +20,9 @@ export type RestaurantCreateType = {
   ownerPhoneNumberPrimary?: PhoneNumber;
   ownerPhoneNumberSecondary?: PhoneNumber;
   email: string;
-  floor: number;
+  floor: {
+    id: number;
+  };
   cuisineStyles: CuisineStyle[];
   dishCategories: DishCategory[];
   openingTime: string;

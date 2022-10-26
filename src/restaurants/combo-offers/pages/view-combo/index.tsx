@@ -16,6 +16,7 @@ import {
   useRouteToComboRoot,
 } from "restaurants/combo-offers/hooks";
 import routes from "restaurants/combo-offers/routes";
+import mapComboDataToComboFormValues from "restaurants/combo-offers/services/map-combo-data-to-combo-form-values";
 
 const ViewCombo: React.FC = () => {
   const { id } = useParams();
@@ -51,6 +52,7 @@ const ViewCombo: React.FC = () => {
                 </Button>
               </>
             }
+            defaultValues={mapComboDataToComboFormValues(combo)}
             formName={combo?.comboName ?? ""}
             variant="view"
           />

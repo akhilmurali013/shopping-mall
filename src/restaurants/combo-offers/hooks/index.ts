@@ -5,3 +5,6 @@ export { default as useGetRestaurantNameIdMap } from "./get-restaurant-name-id-m
 export { default as useGetComboOffer } from "./get-combo-offer";
 export { default as useGetRestaurantDishes } from "./get-restaurant-dishes";
 export { default as useCreateComboOffer } from "./create-combo";
+export { default as useUploadComboFile } from "./upload-combo-images";
+export { default as useUpdateComboOffer } from "./update-combo";
+export { default as useDeleteComboImage } from "./delete-combo-image";
